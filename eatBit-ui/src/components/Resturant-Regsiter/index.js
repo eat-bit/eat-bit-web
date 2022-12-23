@@ -8,6 +8,11 @@ import { Help } from "tabler-icons-react";
 
 import Link from "next/link";
 
+import React from "react";
+const addRestaurant = React.lazy(
+    () => import('api').then(module => ({ default: module.addRestaurant }))
+);
+
 import { useEffect, useState } from "react";
 
 import RestNavbar from 'components/Resturant-Navbar';
@@ -28,6 +33,7 @@ const Register = ({ opened, setOpened }) => {
         "description": ""
     })
 
+    console.log("shovanfis", addRestaurant)
     return (
         <>
             <div className="w-[80%] h-[80%] bg-gradient-to-r from-primary-500 to-blue-500">
@@ -127,7 +133,7 @@ const Register = ({ opened, setOpened }) => {
                             <Link href="/resturant/add-items" legacyBehavior>
                                 <a>
                                     <button
-                                        // onClick={() => addRestaurant(restData.name, restData.description, restData.ptaa)}
+                                        onClick={() => addRestaurant(restData.name, restData.description, restData.ptaa, "url")}
                                         className="bg-primary text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                                     // style={{ background: loader ? "var(--secondary-color)" : "var(--primary-color)" }}
 

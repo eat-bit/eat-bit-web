@@ -76,10 +76,13 @@ export async function addItem(fullName, price, description, imageURL) {
     await console.log(txResponse.toString());
 }
 
-export async function addRestaurant(fullName, description, address) {
+export async function addRestaurant(fullName, description, address, imageUrl) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).addRestraunt(fullName, description, address, { gasLimit: 3000000 });
-    await console.log(txResponse.toString());
+    await connectWallet().then(async (res) => {
+        const txResponse = await contract.connect(signer).addRestraunt(fullName, description, address, imageUrl, { gasLimit: 3000000 });
+        await console.log(txResponse.toString());
+        return await txResponse.toString();
+    })
 }
 
 export async function orderComplete(idx) {
