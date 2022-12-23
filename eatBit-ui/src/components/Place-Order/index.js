@@ -4,30 +4,49 @@ import {
     Modal,
     useMantineTheme,
 } from "@mantine/core";
+import { useContext } from "react";
 import { Help } from "tabler-icons-react";
+
+import { placeOrder } from "api";
 
 import Link from "next/link";
 
 import { useEffect, useState } from "react";
 
 import RestNavbar from 'components/Resturant-Navbar';
+import CartContext from "Context/cart/cartContext";
 
 const useStyles = createStyles((theme) => ({
     rowSelected: {
         backgroundColor: "bg-primary",
     },
 }));
-const PlaceOrder = ({ opened, setOpened }) => {
+const PlaceOrder = ({ opened, setOpened, totalPrice }) => {
+
+    const { cart } = useContext(CartContext);
 
     const theme = useMantineTheme();
+
+    console.log("baby", cart)
+    let arr = [];
+
+    // [1,2,3] = '1,2,3'
+    if (cart) {
+
+        for (let it = 0; it < cart.length; it++) {
+            arr.push(cart[it].id);
+        }
+    }
 
     // const [opened, setOpened] = useState(true);
     const [orderData, setorderData] = useState({
         "name": "",
         "ptaa": "",
         "contactNo": "",
-        "itemId": ""
+        "itemId": arr
     })
+
+
 
     return (
         <>
@@ -77,8 +96,8 @@ const PlaceOrder = ({ opened, setOpened }) => {
                                 id="exampleText0"
                                 placeholder="Phone"
 
-                            // value={userData.phone}
-                            // onChange={(e) => setRestData((old) => ({ ...old, phone: e.target.value }))}
+                                value={orderData.contactNo}
+                                onChange={(e) => setorderData((old) => ({ ...old, contactNo: e.target.value }))}
                             />
                         </div>
 
@@ -95,6 +114,22 @@ const PlaceOrder = ({ opened, setOpened }) => {
 
                                 value={orderData.ptaa}
                                 onChange={(e) => setorderData((old) => ({ ...old, ptaa: e.target.value }))}
+                            />
+                        </div>
+
+                        <div className=" items-center mt-3">
+                            <label className="mb-2 basis-1/5 block text-sm font-medium text-gray-900 ">
+                                Total Price
+                            </label>
+
+                            <input
+                                type="number"
+                                className="form-control mb-2 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="exampleText0"
+                                placeholder="total price"
+                                disabled
+
+                                value={totalPrice}
                             />
                         </div>
 
@@ -141,15 +176,19 @@ const PlaceOrder = ({ opened, setOpened }) => {
 
                         <div className="flex items-center space-x-2 mt-5 justify-end">
 
-                            <Link href="/resturant/add-items" legacyBehavior>
+                            <Link href="/customer/orders" legacyBehavior>
                                 <a>
                                     <button
                                         // onClick={() => addRestaurant(orderData.name, orderData.description, restData.ptaa)}
+                                        onClick={() => {
+                                            console.log("data", orderData)
+                                            // placeOrder(orderData.)
+                                        }}
                                         className="bg-primary text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                                     // style={{ background: loader ? "var(--secondary-color)" : "var(--primary-color)" }}
 
                                     >
-                                        Book
+                                        Place Order
                                     </button>
                                 </a>
                             </Link>
@@ -157,7 +196,7 @@ const PlaceOrder = ({ opened, setOpened }) => {
 
                             <button
                                 className="bg-mainRed text-gray-500 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 "
-                            // onClick={handleCancelModal}
+                                onClick={() => setOpened(false)}
                             >
                                 Cancel
                             </button>
