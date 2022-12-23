@@ -56,7 +56,7 @@ const FoodItem = ({ food, key }) => {
                 </div>
                 <div className="flex justify-between px-6 pt-4 pb-2">
                     <h3 className="flex justify-between items-center text-xl font-semibold mb-1 text-white">
-                        <span>${food.price}</span>
+                        <span>MATIC {food.price}</span>
                     </h3>
 
                     <span className="flex items-center gap-1">
