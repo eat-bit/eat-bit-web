@@ -14,14 +14,16 @@ contract Eatbit {
     }
 
     // function addDefaults() public {
-    //     addRestraunt("Lords of Drinks", "dating spot", "Nirman Vihar");
+    //     // addRestraunt("Lords of Drinks", "dating spot", "Nirman Vihar");
+    //     addRestraunt("Lords of Drinks", "dating spot", "Nirman Vihar", "url");
 
     //     addItem("burger", 1000000, "tasty", "url");
     //     addItem("pizza", 2000000, "yummy", "unurl");
     // }
 
     // function addDefaults2() public {
-    //     addRestraunt("Aapki Rasoi", "dec", "1/1");
+    //     // addRestraunt("Aapki Rasoi", "dec", "1/1");
+    //     addRestraunt("Aapki Rasoi", "dec", "1/1", "url");
 
     //     addItem("pasta", 3, "eww", "uurl");
     // }
@@ -60,7 +62,7 @@ contract Eatbit {
     }
 
     struct Restraunt {
-        // image
+        string imageURL;
         address sender;
         string name;
         uint256[] itemId;
@@ -81,7 +83,8 @@ contract Eatbit {
     function addRestraunt(
         string memory name,
         string memory description,
-        string memory ptaa
+        string memory ptaa,
+        string memory imageURL
     ) public {
         for (uint256 ind = 0; ind < restrauntList.length; ind++) {
             require(
@@ -101,6 +104,7 @@ contract Eatbit {
         newRestraunt.ptaa = ptaa;
         newRestraunt.id = restrauntNumber;
         newRestraunt.orderId = tempArray;
+        newRestraunt.imageURL = imageURL;
 
         restrauntList.push(newRestraunt);
 
