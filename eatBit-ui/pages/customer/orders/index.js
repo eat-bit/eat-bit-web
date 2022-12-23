@@ -14,7 +14,9 @@ import Link from "next/link";
 import { Ban, Dots, Select } from "tabler-icons-react";
 import { useEffect, useState } from "react";
 import Navbar from 'components/Navbar';
-const API = React.lazy(() => import('api/index.js'));
+const orderComplete = React.lazy(
+  () => import('api').then(module => ({ default: module.orderComplete }))
+);
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -138,7 +140,7 @@ export default function Orders() {
                     <Select
                       style={{ cursor: "pointer", marginRight: "1rem" }}
                       color="green"
-                      onClick={() => API.orderComplete(item.id)}
+                      onClick={() => orderComplete(item.id)}
                     />
                   </td>
                 </tr>

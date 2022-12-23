@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Link from "next/link";
 import styles from "../../styles/Navbar.module.css";
-const API = React.lazy(() => import('api/index.js'));
+const connectWallet = React.lazy(
+  () => import('api').then(module => ({ default: module.connectWallet }))
+);
 // React Icons
 import { MdOutlineDeliveryDining, MdOutlineShoppingCart } from "react-icons/md";
 import AvatarCustom from '../CustomAvatar';
@@ -63,7 +65,7 @@ const Navbar = () => {
 
         </div>
 
-        {account ? <Button style={{ background: "#22C55E" }}>Connected</Button> : <Button style={{ background: "#ff7d7d" }} onClick={() => {setAccount(API.connectWallet);}}>Connect Wallet</Button>}
+        {account ? <Button style={{ background: "#22C55E" }}>Connected</Button> : <Button style={{ background: "#ff7d7d" }} onClick={() => {setAccount(connectWallet);}}>Connect Wallet</Button>}
         {/* <AvatarCustom name={"S"} onClick={() => console.log("ola")} /> */}
       </div>
 
