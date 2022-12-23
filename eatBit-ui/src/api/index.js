@@ -108,3 +108,9 @@ export async function getItemIdForOrder() {
     const txResponse = await contract.connect(signer).getItemIdForOrder(0);
     await console.log(txResponse.toString());
 }
+
+export async function isRestrauntExist() {
+    const contract = new ethers.Contract(contractAddress, contractAbi, provider);
+    const txResponse = await contract.connect(signer).isRestrauntExist();
+    await console.log(txResponse.toString());
+}
