@@ -4,6 +4,7 @@ import Link from 'next/link';
 // Components
 import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
+import PlaceOrder from 'components/Place-Order';
 
 // Scroll To Top Hook
 import useScrollTop from 'Hooks/useScrollTop';
@@ -24,6 +25,7 @@ export default function Cart() {
 
     const { product, cart, increment, decrement, increaseTheCartQty, decreaseTheCartQty } = useContext(CartContext);
 
+    const [opened, setOpened] = useState(false);
 
     // const cart = product.cart;
     console.log(cart)
@@ -37,6 +39,8 @@ export default function Cart() {
         console.log("number")
         setTotal(cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0));
     }, [cart])
+
+    console.log("totallll", total)
 
     return (
         <div>
@@ -59,7 +63,7 @@ export default function Cart() {
                     <div className='flex w-full justify-around'>
                         <h1>Total Price: {total}</h1>
 
-                        <Button size='sm' style={{ background: "#E74441" }} >Place Order</Button>
+                        <Button size='sm' style={{ background: "#E74441" }} onClick={() => setOpened(true)}>Place Order</Button>
                     </div>
 
                     <div className="mt-8 grid place-items-center grid-cols-1 gap-4 md:grid-cols-3 sm:grid-cols-2">
@@ -103,6 +107,8 @@ export default function Cart() {
                         }
                     </div>
                 </div>
+
+                {opened && <PlaceOrder setOpened={setOpened} opened={opened} totalPrice={total} />}
                 <Footer />
             </div>
         </div>
