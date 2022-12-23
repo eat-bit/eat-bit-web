@@ -133,59 +133,16 @@ const PlaceOrder = ({ opened, setOpened, totalPrice }) => {
                             />
                         </div>
 
-
-
-                        {/* 
-
-
-
-                        <div className=" items-center mt-3">
-                            <label className="mb-2 basis-1/5 block text-sm font-medium text-gray-900 ">
-                                Description
-                            </label>
-
-                            <textarea
-                                type="text"
-                                className="form-control mb-2 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                id="exampleText0"
-                                placeholder="Description"
-
-                                value={orderData.description}
-                                onChange={(e) => setorderData((old) => ({ ...old, description: e.target.value }))}
-                            />
-                        </div>
-
-                        <div className=" items-center mt-3">
-                            <label className="mb-2 basis-1/5 block text-sm font-medium text-gray-900 ">
-                                Address
-                            </label>
-
-                            <input
-                                type="text"
-                                className="form-control mb-2 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                id="exampleText0"
-                                placeholder="address"
-
-                                value={orderData.ptaa}
-                                onChange={(e) => setorderData((old) => ({ ...old, ptaa: e.target.value }))}
-                            />
-                        </div>
-                        {/* */}
-
-
-
                         <div className="flex items-center space-x-2 mt-5 justify-end">
 
                             <Link href="/customer/orders" legacyBehavior>
                                 <a>
                                     <button
-                                        // onClick={() => addRestaurant(orderData.name, orderData.description, restData.ptaa)}
                                         onClick={() => {
                                             console.log("data", orderData)
-                                            // placeOrder(orderData.)
+                                            placeOrder(orderData.itemId, orderData.ptaa, orderData.name, orderData.contactNo)
                                         }}
                                         className="bg-primary text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-                                    // style={{ background: loader ? "var(--secondary-color)" : "var(--primary-color)" }}
 
                                     >
                                         Place Order

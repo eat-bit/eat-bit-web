@@ -4,7 +4,7 @@ export const data = [
         title: "Stack O'Snacks",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         image_url: "https://bit.ly/3oN02gp",
-        price: 20,
+        price: 5,
         rating: 4,
         route: "customer/resturant/1",
         resturantId: "1"
@@ -14,7 +14,7 @@ export const data = [
         title: "Pizza",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         image_url: "https://bit.ly/3bqiWqr",
-        price: 18,
+        price: 6,
         rating: 3,
         route: "customer/resturant/1",
         resturantId: "1"
@@ -24,7 +24,7 @@ export const data = [
         title: "Perfect Burger",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         image_url: "https://bit.ly/3Q8kVyo",
-        price: 22,
+        price: 7,
         rating: 5,
         route: "customer/resturant/3",
         resturantId: "1"
@@ -34,7 +34,7 @@ export const data = [
         title: "Taco",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         image_url: "https://bit.ly/3zMTKE2",
-        price: 34,
+        price: 6,
         rating: 4,
         route: "customer/resturant/2",
         resturantId: "2"
@@ -44,7 +44,7 @@ export const data = [
         title: "Laksa",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         image_url: "https://bit.ly/3zs7YIU",
-        price: 45,
+        price: 3,
         rating: 3,
         route: "customer/resturant/4",
         resturantId: "2",
@@ -54,7 +54,7 @@ export const data = [
         title: "Tom Yum",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         image_url: "https://bit.ly/3cTZDGq",
-        price: 40,
+        price: 3,
         rating: 4,
         route: "customer/resturant/1",
         resturantId: "2"

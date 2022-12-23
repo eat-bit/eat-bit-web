@@ -40,7 +40,6 @@ export default function Cart() {
         setTotal(cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0));
     }, [cart])
 
-    console.log("totallll", total)
 
     return (
         <div>
