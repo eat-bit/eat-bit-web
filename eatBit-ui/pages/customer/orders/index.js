@@ -1,3 +1,4 @@
+import React from "react";
 import { Button, Loader, Pagination, Skeleton } from "@mantine/core";
 import {
   createStyles,
@@ -13,7 +14,7 @@ import Link from "next/link";
 import { Ban, Dots, Select } from "tabler-icons-react";
 import { useEffect, useState } from "react";
 import Navbar from 'components/Navbar';
-import {orderComplete} from 'api';
+const API = React.lazy(() => import('api/index.js'));
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -137,7 +138,7 @@ export default function Orders() {
                     <Select
                       style={{ cursor: "pointer", marginRight: "1rem" }}
                       color="green"
-                      onClick={() => orderComplete(item.id)}
+                      onClick={() => API.orderComplete(item.id)}
                     />
                   </td>
                 </tr>

@@ -1,3 +1,4 @@
+import React from "react";
 import { Button, Loader, Pagination, Skeleton } from "@mantine/core";
 import {
   createStyles,
@@ -6,7 +7,7 @@ import {
 
 import Link from "next/link";
 import RestNavbar from 'components/Resturant-Navbar';
-import {acceptOrder} from 'api'
+const API = React.lazy(() => import('api/index.js'));
 
 import { Ban, Dots, Select } from "tabler-icons-react";
 import { useEffect, useState } from "react";
@@ -102,12 +103,12 @@ export default function Orders() {
                     <Select
                       style={{ cursor: "pointer", marginRight: "1rem" }}
                       color="green"
-                      onClick={() => acceptOrder(true, item.id)}
+                      onClick={() => API.acceptOrder(true, item.id)}
                     />
                     <Ban
                       style={{ cursor: "pointer", marginRight: "1rem" }}
                       color="red"
-                      onClick={() => acceptOrder(false, item.id)}
+                      onClick={() => API.acceptOrder(false, item.id)}
                     />
                   </td>
                   <td className="">
