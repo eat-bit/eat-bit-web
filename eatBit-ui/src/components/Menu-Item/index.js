@@ -51,9 +51,9 @@ function MenuItem() {
 
 
 
-    const items = menuData.map((item) => (
+    const items = menuData.map((item, idx) => (
 
-        <div className='m-3 w-full'>
+        <div className='m-3 w-full' key={idx}>
             <AccordionLabel item={item} />
         </div>
 

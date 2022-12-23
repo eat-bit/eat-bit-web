@@ -107,7 +107,7 @@ const Items = ({ }) => {
                     }
                   />
                   <Tooltip label="You can add image using imageshack.com" color="teal" position="right">
-                    <a href="https://imageshack.com/" target="_blank">
+                    <a href="https://imageshack.com/">
                       <Help size={36} strokeWidth={2} color={"black"} />
                     </a>
                   </Tooltip>
