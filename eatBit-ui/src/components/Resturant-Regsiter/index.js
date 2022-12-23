@@ -1,3 +1,4 @@
+import React,{useEffect} from "react";
 import { Button, Loader, Pagination, Skeleton } from "@mantine/core";
 import {
     createStyles,
@@ -6,9 +7,15 @@ import {
 } from "@mantine/core";
 import { Help } from "tabler-icons-react";
 
+const addRestaurant = React.lazy(
+    () => import('api').then(module => ({ default: module.addRestaurant }))
+  );
+
+
+
 import Link from "next/link";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import RestNavbar from 'components/Resturant-Navbar';
 
@@ -19,6 +26,14 @@ const useStyles = createStyles((theme) => ({
 }));
 const Register = ({ opened, setOpened }) => {
 
+    // useEffect(() => {
+    //     if (typeof window !== "undefined") {
+    //         // Client-side-only code
+            
+    //       }
+    // }, []);
+
+
     const theme = useMantineTheme();
 
     // const [opened, setOpened] = useState(true);
@@ -27,6 +42,20 @@ const Register = ({ opened, setOpened }) => {
         "ptaa": "",
         "description": ""
     })
+
+    useEffect(() => {
+        ( async () => {
+          if(typeof window !== "undefined"){
+            // Client-side-only code
+            // const res = addRestaurant(restData);
+            // console.log(res)
+            import('api').then(module => {
+                const res = module.addRestaurant(restData);
+                console.log(res)
+            })
+         }
+         })()
+       }, [])
 
     return (
         <>
@@ -127,7 +156,7 @@ const Register = ({ opened, setOpened }) => {
                             <Link href="/resturant/add-items" legacyBehavior>
                                 <a>
                                     <button
-                                        // onClick={() => addRestaurant(restData.name, restData.description, restData.ptaa)}
+                                        onClick={()=>(addRestaurant(restData.name, restData.description, restData.ptaa))}
                                         className="bg-primary text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                                     // style={{ background: loader ? "var(--secondary-color)" : "var(--primary-color)" }}
 
