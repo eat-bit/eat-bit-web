@@ -326,7 +326,13 @@ contract Eatbit {
         }
     }
 
-    function changeInterval(uint256 newInterval) public onlyOwner {
-        interval = newInterval;
+    function isRestrauntExist() public view returns (bool) {
+        for (uint256 ind = 0; ind < restrauntList.length; ind++) {
+            if (msg.sender == restrauntList[ind].sender) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
