@@ -1,7 +1,7 @@
 const { ethers } = require("ethers");
 import contractAbi from "../../../contract/abi/Eatbit.json";
 
-const contractAddress = "0x3C10eadFE40EB2eBca722f4C31c2338Bf130349e";
+const contractAddress = "0x8EcC901d02fd7CC8A0890438bAD5E061Fd2E8F69";
 
 let provider = new ethers.providers.Web3Provider(window.ethereum);
 let signer;
@@ -19,16 +19,18 @@ export async function getBalance() {
 
 // ------------------ Contract functions ------------------
 
-export async function itemList() {
+export async function itemList(idx) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).itemList(0);
-    await console.log(txResponse);
+    const txResponse = await contract.connect(signer).itemList(idx);
+    // await console.log(txResponse);
+    return await txResponse;
 }
 
 export async function itemNumber() {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     const txResponse = await contract.connect(signer).itemNumber();
-    await console.log(txResponse.toString());
+    // await console.log(txResponse.toString());
+    return await txResponse.toString();
 }
 
 export async function restaurantList() {
@@ -43,22 +45,22 @@ export async function restaurantNumber() {
     await console.log(txResponse.toString());
 }
 
-export async function orderDetails() {
+export async function orderDetails(idx) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).orderDetails(0);
-    await console.log(txResponse.toString());
+    const txResponse = await contract.connect(signer).orderDetails(idx);
+    return txResponse.toString();
 }
 
 export async function checkOrdersCustomer() {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     const txResponse = await contract.connect(signer).checkOrdersCust();
-    await console.log(txResponse.toString());
+    return await txResponse.toString();
 }
 
 export async function checkOrdersRestaurant() {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     const txResponse = await contract.connect(signer).checkOrdersRestraunt();
-    await console.log(txResponse.toString());
+    return await txResponse.toString();
 }
 
 export async function acceptOrder(ans, idx) {
@@ -67,15 +69,16 @@ export async function acceptOrder(ans, idx) {
     await console.log(txResponse.toString());
 }
 
-export async function addItem() {
+export async function addItem(fullName, price, description, imageURL) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).addItem("Dosa", 35, "Tasty", "uuurl");
+    const txResponse = await contract.connect(signer).addItem(fullName, price, description, imageURL);
+    // const txResponse = await contract.connect(signer).addItem("abc", 12, "df", "uurl");
     await console.log(txResponse.toString());
 }
 
-export async function addRestaurant() {
+export async function addRestaurant(fullName, description, address) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).addRestraunt("name", "cool", "Delhi");
+    const txResponse = await contract.connect(signer).addRestraunt(fullName, description, address, { gasLimit: 3000000 });
     await console.log(txResponse.toString());
 }
 
@@ -85,9 +88,9 @@ export async function orderComplete(idx) {
     await console.log(txResponse.toString());
 }
 
-export async function placeOrder() {
+export async function placeOrder(itemArr, address, fullname, customerContact) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).placeOrder([0], "Delhi", "Harshit", "1234567890", {gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1))});
+    const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
     await console.log(txResponse.toString());
 }
 
@@ -106,11 +109,5 @@ export async function checkItemRestraunt() {
 export async function getItemIdForOrder() {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     const txResponse = await contract.connect(signer).getItemIdForOrder(0);
-    await console.log(txResponse.toString());
-}
-
-export async function isRestrauntExist() {
-    const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).isRestrauntExist();
     await console.log(txResponse.toString());
 }
