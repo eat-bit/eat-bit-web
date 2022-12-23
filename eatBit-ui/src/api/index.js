@@ -93,7 +93,7 @@ export async function placeOrder(itemArr, address, fullname, customerContact) {
     // const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
     await connectWallet().then(async (res) => {
         const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
-        await console.log(txResponse.toString());
+        return await console.log(txResponse.toString());
     });
     // const txResponse = await contract.connect(signer).placeOrder([0], "address", "fullname", 123, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
     // return await txResponse.toString();
