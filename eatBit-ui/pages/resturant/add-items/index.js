@@ -12,6 +12,7 @@ import {
 
 import { data } from "components/Featured-Food/data/data.js";
 import RestNavbar from 'components/Resturant-Navbar';
+import { addItem } from 'api';
 
 
 

@@ -71,17 +71,20 @@ export async function acceptOrder(ans, idx) {
 
 export async function addItem(fullName, price, description, imageURL) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).addItem(fullName, price, description, imageURL);
-    // const txResponse = await contract.connect(signer).addItem("abc", 12, "df", "uurl");
-    await console.log(txResponse.toString());
+    await connectWallet().then(async (res) => {
+        const txResponse = await contract.connect(signer).addItem(fullName, price, description, imageURL);
+        await console.log(txResponse.toString());
+        return await txResponse.toString();
+    })
 }
 
 export async function addRestaurant(fullName, description, address, imageUrl) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     await connectWallet().then(async (res) => {
         const txResponse = await contract.connect(signer).addRestraunt(fullName, description, address, { gasLimit: 3000000 });
-        await console.log(txResponse.toString());
-        return await txResponse.toString();
+        console.log(txResponse.toString());
+        return txResponse.toString();
+
     })
 }
 
