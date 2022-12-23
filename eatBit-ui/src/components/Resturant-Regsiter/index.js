@@ -9,9 +9,11 @@ import { Help } from "tabler-icons-react";
 import Link from "next/link";
 
 import React from "react";
-const addRestaurant = React.lazy(
-    () => import('api').then(module => ({ default: module.addRestaurant }))
-);
+
+import { addRestaurant } from "api";
+// const addRestaurant = React.lazy(
+//     () => import('api').then(module => ({ default: module.addRestaurant }))
+// );
 
 import { useEffect, useState } from "react";
 
