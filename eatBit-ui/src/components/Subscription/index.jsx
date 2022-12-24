@@ -16,7 +16,7 @@ const Subscription = () => {
                     We Deliver as fast as you expect
                 </h1>
                 <p className="my-6 text-gray-600 leading-8">
-                    Let's us know how can we improve our services.
+                    Let&rsquo;s us know how can we improve our services.
                 </p>
                 <div className="flex flex-col justify-start items-center gap-2 max-w-xl w-100 m-auto lg:m-0 md:flex-row">
                     <input type="email" placeholder="eatbittech@gmail.com" className="border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 focus:border-green-500" />

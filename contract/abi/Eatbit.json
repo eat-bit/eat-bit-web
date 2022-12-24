@@ -61,6 +61,11 @@
 				"internalType": "string",
 				"name": "ptaa",
 				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "imageURL",
+				"type": "string"
 			}
 		],
 		"name": "addRestraunt",
@@ -71,19 +76,6 @@
 	{
 		"inputs": [],
 		"name": "chainLinkAutomation",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "newInterval",
-				"type": "uint256"
-			}
-		],
-		"name": "changeInterval",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -230,6 +222,19 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "isRestrauntExist",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -367,6 +372,11 @@
 		],
 		"name": "restrauntList",
 		"outputs": [
+			{
+				"internalType": "string",
+				"name": "imageURL",
+				"type": "string"
+			},
 			{
 				"internalType": "address",
 				"name": "sender",
