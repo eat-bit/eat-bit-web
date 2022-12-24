@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 import RestNavbar from 'components/Resturant-Navbar';
 import { acceptOrder } from 'api';
+import { checkOrdersRestaurant } from 'api';
 
 // const acceptOrder = React.lazy(
 //   () => import('api').then(module => ({ default: module.acceptOrder }))
@@ -55,6 +56,9 @@ export default function Orders() {
   const { classes, cx } = useStyles();
   const [selection, setSelection] = useState(["2"]);
 
+  const [orderIds, setOrderIds] = useState([]);
+  const [orderList, setorderList] = useState([]);
+
   const toggleRow = (id) =>
     setSelection((current) =>
       current.includes(id)
@@ -68,6 +72,15 @@ export default function Orders() {
     );
 
   const isAccepted = false;
+
+  useEffect(() => {
+    checkOrdersRestaurant().then((val) => {
+      console.log(val, "ola")
+      setorderList(val)
+    }
+    );
+
+  }, [orderList])
 
   return (
     <div style={{ height: "100%", width: "100%" }}>

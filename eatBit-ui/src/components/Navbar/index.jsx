@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import Link from "next/link";
 import styles from "../../styles/Navbar.module.css";
-const connectWallet = React.lazy(
-  () => import('api').then(module => ({ default: module.connectWallet }))
-);
+import { connectWallet } from 'api';
 // React Icons
 import { MdOutlineDeliveryDining, MdOutlineShoppingCart } from "react-icons/md";
 import AvatarCustom from '../CustomAvatar';
@@ -50,6 +48,9 @@ const Navbar = () => {
           <li className="text-white font-semibold ease-in-out duration-150 hover:text-black sm:text-black text-lg" title="Contact Us" onClick={() => closeNav()}>
             <Link href="/customer/contact-us">Contact Us</Link>
           </li>
+          <li className="text-white font-semibold ease-in-out duration-150 hover:text-black sm:text-black text-lg" title="Contact Us" onClick={() => closeNav()}>
+            <Link href="/customer/orders">Orders</Link>
+          </li>
         </ul>
       </div>
 
@@ -65,7 +66,7 @@ const Navbar = () => {
 
         </div>
 
-        {account ? <Button style={{ background: "#22C55E" }}>Connected</Button> : <Button style={{ background: "#ff7d7d" }} onClick={() => {setAccount(connectWallet);}}>Connect Wallet</Button>}
+        {account ? <Button style={{ background: "#22C55E" }}>Connected</Button> : <Button style={{ background: "#ff7d7d" }} onClick={() => { setAccount(connectWallet); }}>Connect Wallet</Button>}
         {/* <AvatarCustom name={"S"} onClick={() => console.log("ola")} /> */}
       </div>
 
