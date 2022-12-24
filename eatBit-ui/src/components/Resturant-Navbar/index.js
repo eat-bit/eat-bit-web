@@ -5,9 +5,11 @@ import Register from 'components/Resturant-Regsiter';
 // React Icons
 import { MdOutlineDeliveryDining, MdOutlineShoppingCart } from "react-icons/md";
 import AvatarCustom from '../CustomAvatar';
-const connectWallet = React.lazy(
-    () => import('api').then(module => ({ default: module.connectWallet }))
-  );
+// const connectWallet = React.lazy(
+//     () => import('api').then(module => ({ default: module.connectWallet }))
+//   );
+
+import { connectWallet } from 'api';
 import { Button } from '@mantine/core';
 
 
@@ -15,7 +17,7 @@ const RestNavbar = () => {
 
     const [opened, setOpened] = useState(false);
     let [navOpen, setNavbOpen] = useState(false);
-  const [account, setAccount] = useState(null);
+    const [account, setAccount] = useState(null);
 
 
     const closeNav = () => {
@@ -60,7 +62,7 @@ const RestNavbar = () => {
                 <div className="w-[13%] flex justify-around">
 
 
-                {account ? <Button style={{ background: "#22C55E" }}>Connected</Button> : <Button style={{ background: "#ff7d7d" }} onClick={() => {setAccount(connectWallet);}}>Connect Wallet</Button>}
+                    {account ? <Button style={{ background: "#22C55E" }}>Connected</Button> : <Button style={{ background: "#ff7d7d" }} onClick={() => { setAccount(connectWallet); }}>Connect Wallet</Button>}
 
                 </div>
 

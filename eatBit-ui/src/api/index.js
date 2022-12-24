@@ -72,9 +72,10 @@ export async function acceptOrder(ans, idx) {
 export async function addItem(fullName, price, description, imageURL) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     await connectWallet().then(async (res) => {
+        price = Number(price);
         const txResponse = await contract.connect(signer).addItem(fullName, price, description, imageURL);
         await console.log(txResponse.toString());
-        return await txResponse.toString();
+        return txResponse.toString();
     })
 }
 

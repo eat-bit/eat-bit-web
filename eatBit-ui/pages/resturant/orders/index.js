@@ -7,9 +7,11 @@ import {
 
 import Link from "next/link";
 import RestNavbar from 'components/Resturant-Navbar';
-const acceptOrder = React.lazy(
-  () => import('api').then(module => ({ default: module.acceptOrder }))
-);
+import { acceptOrder } from 'api';
+
+// const acceptOrder = React.lazy(
+//   () => import('api').then(module => ({ default: module.acceptOrder }))
+// );
 
 import { Ban, Dots, Select } from "tabler-icons-react";
 import { useEffect, useState } from "react";

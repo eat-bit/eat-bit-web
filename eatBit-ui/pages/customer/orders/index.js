@@ -14,9 +14,7 @@ import Link from "next/link";
 import { Ban, Dots, Select } from "tabler-icons-react";
 import { useEffect, useState } from "react";
 import Navbar from 'components/Navbar';
-const orderComplete = React.lazy(
-  () => import('api').then(module => ({ default: module.orderComplete }))
-);
+import { orderComplete } from 'api';
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -70,7 +68,7 @@ export default function Orders() {
 
   return (
     <div style={{ height: "100%", width: "100%" }}>
-    <Navbar />
+      <Navbar />
       <div className="w-full py-5 px-5 flex justify-between bg-white">
         <h3 class="font-medium leading-tight text-3xl mt-0 mb-2 text-black-600">
           Order List
