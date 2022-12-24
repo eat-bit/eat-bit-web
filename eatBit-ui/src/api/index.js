@@ -1,7 +1,7 @@
 const { ethers } = require("ethers");
 import contractAbi from "../../../contract/abi/Eatbit.json";
 
-const contractAddress = "0x339d94712752dA1Ff764d5eeB0f987dC7EE5b871";
+const contractAddress = "0x3C10eadFE40EB2eBca722f4C31c2338Bf130349e";
 
 let provider = new ethers.providers.Web3Provider(window.ethereum);
 let signer;
@@ -100,7 +100,7 @@ export async function placeOrder(itemArr, address, fullname, customerContact) {
     // const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
     await connectWallet().then(async (res) => {
         const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
-        await console.log(txResponse.toString());
+        return await console.log(txResponse.toString());
     });
     // const txResponse = await contract.connect(signer).placeOrder([0], "address", "fullname", 123, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
     // return await txResponse.toString();
