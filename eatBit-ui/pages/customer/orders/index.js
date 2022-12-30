@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Loader, Pagination, Skeleton } from "@mantine/core";
 // checkOrdersCustomer
-import { checkOrdersCustomer } from "api";
+// import { checkOrdersCustomer } from "api";
 import {
   createStyles,
   Table,
@@ -18,9 +18,7 @@ import { useEffect, useState } from "react";
 import dynamic from 'next/dynamic';
 // Components
 const Navbar = dynamic(() => import('components/Navbar'), { ssr: false });
-const orderComplete = React.lazy(
-  () => import('api').then(module => ({ default: module.orderComplete }))
-);
+const MarkOrderComplete = dynamic(() => import('components/Customer-MarkOrderComplete'), { ssr: false });
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -59,12 +57,12 @@ export default function Orders() {
   const [orderList, setOrderList] = useState([]);
   const [orderIds , setOrderIds] = useState([]);
   
-  useEffect(() => {
-    checkOrdersCustomer().then((res) => {
-      console.log(res)
-      // setOrderList(res);
-    });
-  }, []);
+  // useEffect(() => {
+  //   checkOrdersCustomer().then((res) => {
+  //     console.log(res)
+  //     setOrderList(res);
+  //   });
+  // }, []);
       
   const { classes, cx } = useStyles();
   const [selection, setSelection] = useState(["2"]);
@@ -151,11 +149,7 @@ export default function Orders() {
                     />
                   </td>
                   <td>
-                    <Select
-                      style={{ cursor: "pointer", marginRight: "1rem" }}
-                      color="green"
-                      onClick={() => orderComplete(item.id)}
-                    />
+                    <MarkOrderComplete itemID={item.id} />
                   </td>
                 </tr>
               );
