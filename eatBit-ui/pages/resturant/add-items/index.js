@@ -9,12 +9,15 @@ import {
   Pagination,
   Tooltip,
 } from "@mantine/core";
+import dynamic from "next/dynamic";
 
 import { data } from "components/Featured-Food/data/data.js";
-import RestNavbar from 'components/Resturant-Navbar';
-import { addItem } from 'api';
-
-
+const RestNavbar = dynamic(() => import("components/Resturant-Navbar"), {
+  ssr: false,
+});
+const AddItemButton = dynamic(() => import("components/Restaurant-AddItem"), {
+  ssr: false,
+});
 
 import { Help } from "tabler-icons-react";
 
@@ -24,7 +27,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const Items = ({ }) => {
+const Items = ({}) => {
   const theme = useMantineTheme();
 
   const [open, setOpen] = useState(false);
@@ -44,15 +47,13 @@ const Items = ({ }) => {
       <RestNavbar />
       <button
         onClick={() => {
-          setOpen(true)
+          setOpen(true);
         }}
         className="m-6 bg-primary text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
       >
         Add Items
       </button>
       <div className="h-full w-full flex flex-col justify-center items-center mt-6">
-
-
         {/* <FoodItem food={restData} /> */}
         {open && (
           <Modal
@@ -96,7 +97,6 @@ const Items = ({ }) => {
                 </label>
 
                 <div className="flex">
-
                   <input
                     className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 h-8 mb-2 p-2 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                     type="text"
@@ -106,14 +106,16 @@ const Items = ({ }) => {
                       setItem((old) => ({ ...old, imageURL: e.target.value }))
                     }
                   />
-                  <Tooltip label="You can add image using imageshack.com" color="teal" position="right">
+                  <Tooltip
+                    label="You can add image using imageshack.com"
+                    color="teal"
+                    position="right"
+                  >
                     <a href="https://imageshack.com/">
                       <Help size={36} strokeWidth={2} color={"black"} />
                     </a>
                   </Tooltip>
                 </div>
-
-
               </div>
 
               <div className=" items-center mt-3">
@@ -151,20 +153,12 @@ const Items = ({ }) => {
               </div>
 
               <div className="flex items-center space-x-2 mt-5 justify-end">
-                <button
-                  onClick={() =>
-                    addItem(
-                      setItem.name,
-                      setItem.price,
-                      setItem.description,
-                      setItem.imageURL
-                    )
-                  }
-                  className="bg-primary text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-                // style={{ background: loader ? "var(--secondary-color)" : "var(--primary-color)" }}
-                >
-                  Add
-                </button>
+                <AddItemButton
+                  name={setItem.name}
+                  price={setItem.price}
+                  description={setItem.description}
+                  imageURL={setItem.imageURL}
+                />
 
                 <button
                   className="bg-mainRed text-gray-500 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 "
@@ -206,7 +200,6 @@ const Items = ({ }) => {
                       key={item._id}
                       className={cx({ [classes.rowSelected]: selected })}
                     >
-
                       <td>{item.title}</td>
                       <td>{item.description}</td>
                       <td>{item.price}</td>

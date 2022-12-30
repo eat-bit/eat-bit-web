@@ -1,14 +1,17 @@
 import React from "react";
 import { Button, Loader, Pagination, Skeleton } from "@mantine/core";
-import {
-  createStyles,
-  Table
-} from "@mantine/core";
+import { createStyles, Table } from "@mantine/core";
 
 import Link from "next/link";
-import RestNavbar from 'components/Resturant-Navbar';
-const acceptOrder = React.lazy(
-  () => import('api').then(module => ({ default: module.acceptOrder }))
+import dynamic from "next/dynamic";
+const RestNavbar = dynamic(() => import("components/Resturant-Navbar"), {
+  ssr: false,
+});
+const AcceptRejectOrder = dynamic(
+  () => import("components/Restaurant-Orders"),
+  {
+    ssr: false,
+  }
 );
 
 import { Ban, Dots, Select } from "tabler-icons-react";
@@ -47,8 +50,6 @@ const data = [
   },
 ];
 
-
-
 export default function Orders() {
   const { classes, cx } = useStyles();
   const [selection, setSelection] = useState(["2"]);
@@ -79,7 +80,8 @@ export default function Orders() {
         <Table
           sx={{ minWidth: 800 }}
           verticalSpacing="sm"
-          style={{ background: "white" }}>
+          style={{ background: "white" }}
+        >
           <thead>
             <tr>
               <th>Customer Address</th>
@@ -95,23 +97,14 @@ export default function Orders() {
               return (
                 <tr
                   key={item._id}
-                  className={cx({ [classes.rowSelected]: selected })}>
-
+                  className={cx({ [classes.rowSelected]: selected })}
+                >
                   <td>{item.address}</td>
                   <td>{`${item.orders}`}</td>
                   <td>{item.price}</td>
 
                   <td className="flex items-center">
-                    <Select
-                      style={{ cursor: "pointer", marginRight: "1rem" }}
-                      color="green"
-                      onClick={() => acceptOrder(true, item.id)}
-                    />
-                    <Ban
-                      style={{ cursor: "pointer", marginRight: "1rem" }}
-                      color="red"
-                      onClick={() => acceptOrder(false, item.id)}
-                    />
+                    <AcceptRejectOrder itemID={item.id} />
                   </td>
                   <td className="">
                     {isAccepted ? (
@@ -131,7 +124,8 @@ export default function Orders() {
             justifyContent: "flex-end",
             width: "100%",
             marginTop: "2rem",
-          }}>
+          }}
+        >
           <Pagination size="sm" total={10} position="end"></Pagination>
         </div>
       </div>

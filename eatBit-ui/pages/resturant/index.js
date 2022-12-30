@@ -1,24 +1,21 @@
 import React from "react";
 import Head from 'next/head';
-
+import dynamic from "next/dynamic";
 // Components
-import RestNavbar from 'components/Resturant-Navbar';
+const RestNavbar = dynamic(() => import("components/Resturant-Navbar"), {
+    ssr: false,
+  });
 import RestHero from 'components/Resturant-Hero';
 import Footer from "components/Footer";
 
 // Scroll To Top Hook
 import useScrollTop from 'Hooks/useScrollTop';
 
-
-
-
 export default function Home() {
 
     useScrollTop();
 
     return (
-
-
         <div>
             <Head>
                 <title>EatBit</title>
