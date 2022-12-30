@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 // Components
 const Navbar = dynamic(() => import('components/Navbar'), { ssr: false });
 import Footer from 'components/Footer';
-import PlaceOrder from 'components/Place-Order';
+const PlaceOrder = dynamic(() => import('components/Place-Order'), { ssr: false });
 
 // Scroll To Top Hook
 import useScrollTop from 'Hooks/useScrollTop';
