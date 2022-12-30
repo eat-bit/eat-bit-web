@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import Link from "next/link";
 import styles from "../../styles/Navbar.module.css";
-const connectWallet = React.lazy(
-  () => import('api').then(module => ({ default: module.connectWallet }))
-);
+import { connectWallet } from "api";
 // React Icons
 import { MdOutlineDeliveryDining, MdOutlineShoppingCart } from "react-icons/md";
 import AvatarCustom from '../CustomAvatar';

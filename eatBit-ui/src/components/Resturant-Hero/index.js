@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Link from "next/link";
-import Register from 'components/Resturant-Regsiter';
-
+import dynamic from 'next/dynamic';
+const Register = dynamic(() => import('components/Resturant-Regsiter'), {
+    ssr: false,
+});
 
 // React Icons
 import { GiHamburger } from "react-icons/gi";

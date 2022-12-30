@@ -1,5 +1,7 @@
 import { Accordion, Group, Avatar, Text } from '@mantine/core';
-import Navbar from 'components/Navbar';
+import dynamic from 'next/dynamic';
+// Components
+const Navbar = dynamic(() => import('components/Navbar'), { ssr: false });
 import Resturant from 'components/ResturantUI'
 
 
