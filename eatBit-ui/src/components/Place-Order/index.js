@@ -4,9 +4,6 @@ import { createStyles, Modal, useMantineTheme } from "@mantine/core";
 import { useContext } from "react";
 import { Help } from "tabler-icons-react";
 
-// const placeOrder = React.lazy(() =>
-//   import("api").then((module) => ({ default: module.placeOrder }))
-// );
 import { getBalance, placeOrder } from "api";
 
 import Link from "next/link";

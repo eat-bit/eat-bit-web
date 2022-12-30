@@ -5,9 +5,7 @@ import Register from 'components/Resturant-Regsiter';
 // React Icons
 import { MdOutlineDeliveryDining, MdOutlineShoppingCart } from "react-icons/md";
 import AvatarCustom from '../CustomAvatar';
-const connectWallet = React.lazy(
-    () => import('api').then(module => ({ default: module.connectWallet }))
-  );
+import { connectWallet } from 'api';
 import { Button } from '@mantine/core';
 
 

@@ -15,7 +15,9 @@ import Link from "next/link";
 
 import { Ban, Dots, Select } from "tabler-icons-react";
 import { useEffect, useState } from "react";
-import Navbar from 'components/Navbar';
+import dynamic from 'next/dynamic';
+// Components
+const Navbar = dynamic(() => import('components/Navbar'), { ssr: false });
 const orderComplete = React.lazy(
   () => import('api').then(module => ({ default: module.orderComplete }))
 );

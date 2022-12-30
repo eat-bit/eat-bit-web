@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import Head from 'next/head';
-
+import dynamic from 'next/dynamic';
 // Components
-import Navbar from 'components/Navbar';
+const Navbar = dynamic(() => import('components/Navbar'), { ssr: false });
 import Notify from 'components/Notification/index.js';
 
 import Hero from 'components/Hero';

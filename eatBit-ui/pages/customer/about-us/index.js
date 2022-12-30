@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-
+import dynamic from 'next/dynamic';
 // Components
-import Navbar from '../../../src/components/Navbar';
+const Navbar = dynamic(() => import('components/Navbar'), { ssr: false });
 import Footer from '../../../src/components/Footer';
 
 // Scroll To Top Hook

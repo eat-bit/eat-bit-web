@@ -11,9 +11,6 @@ import Link from "next/link";
 import React from "react";
 
 import { addRestaurant } from "api";
-// const addRestaurant = React.lazy(
-//     () => import('api').then(module => ({ default: module.addRestaurant }))
-// );
 
 import { useEffect, useState } from "react";
 

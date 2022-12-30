@@ -1,5 +1,4 @@
 import { Accordion, Group, Avatar, Text } from '@mantine/core';
-import Navbar from 'components/Navbar';
 import { data } from 'components/Resturant-Data/data';
 import { data as menuData } from 'components/Menu-data/data';
 import { MdOutlineAddShoppingCart, MdOutlineRemoveShoppingCart, MdStar } from "react-icons/md";

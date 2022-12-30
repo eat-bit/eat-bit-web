@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 // Components
-import Navbar from 'components/Navbar';
+const Navbar = dynamic(() => import('components/Navbar'), { ssr: false });
 import Footer from 'components/Footer';
 import PlaceOrder from 'components/Place-Order';
 
