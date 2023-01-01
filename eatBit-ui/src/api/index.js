@@ -54,7 +54,7 @@ export async function orderDetails(idx) {
 export async function checkOrdersCustomer() {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     const txResponse = await contract.connect(signer).checkOrdersCust();
-    return await txResponse.toString();
+    return txResponse.toString();
 }
 
 export async function checkOrdersRestaurant() {
