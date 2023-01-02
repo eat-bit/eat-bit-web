@@ -74,6 +74,7 @@ export default function CustomerOrder() {
           orderIdArr.push(item);
         }
       });
+      
       console.log(orderIdArr);
 
       return orderIdArr;
