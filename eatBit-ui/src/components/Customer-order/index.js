@@ -16,7 +16,7 @@ import Link from "next/link";
 import { Ban, Dots, Select } from "tabler-icons-react";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { checkOrdersCustomer } from "api";
+import { checkOrdersCustomer, orderDetails } from "api";
 // Components
 const Navbar = dynamic(() => import("components/Navbar"), { ssr: false });
 const MarkOrderComplete = dynamic(
@@ -57,13 +57,68 @@ export default function CustomerOrder() {
       price: "1500",
     },
   ];
-  const [orderList, setOrderList] = useState([]);
-  const [orderIds, setOrderIds] = useState([]);
+  // const [orderList, setOrderList] = useState([]);
+  const [finalOrderList, setFinalOrderList] = useState([]);
+  const [finalOrderIds, setFinalOrderIds] = useState([]);
+  // const [orderIds, setOrderIds] = useState([]);
 
-  const LoadOrders = () => {
-    checkOrdersCustomer().then((res) => {
-      console.log(res);
-      setOrderList(res);
+  const setOrderIdsFunc = async () => {
+    let orderIdArr = [];
+
+    return checkOrdersCustomer().then((res) => {
+      console.log(res)
+      res = res.split(",");
+
+      res.forEach((item, ind) => {
+        if (ind < res[res.length - 1]) {
+          orderIdArr.push(item);
+        }
+      });
+      console.log(orderIdArr);
+
+      return orderIdArr;
+    });
+  };
+
+  const parseOrder = (str, orderId) => {
+    const ele = str.split(",");
+    // console.log(ele);
+    const order = {
+      _id: orderId,
+      custAddress: ele[0],
+      itemIds: ele[1],
+      amount: ele[2],
+      restrauntId: ele[3],
+      isFullfiled: ele[4],
+      isAccepted: ele[5],
+      custPhysicalAddress: ele[6],
+      custName: ele[7],
+      custcontactNumber: ele[8],
+      timeStamp: ele[9],
+    };
+    return order;
+  };
+
+  const fetchOrders = async (orderIdArray) => {
+    let orderList = [];
+
+    orderIdArray.forEach((item, ind) => {
+      orderDetails(item).then((res) => {
+        // console.log(res);
+        orderList.push(parseOrder(res, orderIdArray[ind]));
+
+        // console.log(orderList);
+        ind === orderIdArray.length - 1 && setFinalOrderList(orderList);
+      });
+      //  orderList;
+    });
+
+    return orderList;
+  };
+
+  const LoadOrders = async () => {
+    setOrderIdsFunc().then((res) => {
+      fetchOrders(res);
     });
   };
 
@@ -76,9 +131,12 @@ export default function CustomerOrder() {
     <div style={{ height: "100%", width: "100%" }}>
       <Navbar />
       <div className="w-full py-5 px-5 flex justify-between bg-white">
-        <h3 onClick={LoadOrders} class="font-medium leading-tight text-3xl mt-0 mb-2 text-black-600">
+        <h3
+          onClick={LoadOrders}
+          class="font-medium leading-tight text-3xl mt-0 mb-2 text-black-600">
           Order List
         </h3>
+        {finalOrderList.length > 0 && console.log(finalOrderList)}
       </div>
       <div className="flex flex-col justify-start w-full h-full py-3 px-5 bg-white">
         <Table
@@ -106,7 +164,7 @@ export default function CustomerOrder() {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => {
+            {finalOrderList?.map((item) => {
               const selected = selection.includes(item._id);
               return (
                 <tr
@@ -119,9 +177,9 @@ export default function CustomerOrder() {
                       transitionDuration={0}
                     />
                   </td> */}
-                  <td>{item.address}</td>
-                  <td>{`${item.orders}`}</td>
-                  <td>{item.price}</td>
+                  <td>{item.custPhysicalAddress}</td>
+                  <td>{`${item.itemIds[0]}`}</td>
+                  <td>{item.amount}</td>
 
                   <td className="flex items-center">
                     {isAccepted ? (
@@ -141,7 +199,7 @@ export default function CustomerOrder() {
                     />
                   </td>
                   <td>
-                    <MarkOrderComplete itemID={item.id} />
+                    <MarkOrderComplete itemID={item._id} />
                   </td>
                 </tr>
               );
