@@ -12,6 +12,7 @@ import {
 import dynamic from "next/dynamic";
 
 import { data } from "components/Featured-Food/data/data.js";
+
 const RestNavbar = dynamic(() => import("components/Resturant-Navbar"), {
   ssr: false,
 });
@@ -21,12 +22,10 @@ const AddItem = dynamic(() => import("components/Resturant-Add-Item"), {
 });
 
 
+const ShowItems = dynamic(() => import("components/Resturant-Show-Items"), {
+  ssr: false,
+});
 
-const useStyles = createStyles((theme) => ({
-  rowSelected: {
-    backgroundColor: "#e8fff0",
-  },
-}));
 
 const Items = ({ }) => {
   const theme = useMantineTheme();
@@ -40,8 +39,7 @@ const Items = ({ }) => {
     imageURL: "",
   });
 
-  const { classes, cx } = useStyles();
-  const [selection, setSelection] = useState(["2"]);
+
 
   return (
     <>
@@ -69,34 +67,8 @@ const Items = ({ }) => {
             </h3>
           </div>
           <div className="flex flex-col justify-start py-3 px-5 bg-white">
-            <Table
-              sx={{ minWidth: 800 }}
-              verticalSpacing="sm"
-              style={{ background: "white" }}
-            >
-              <thead>
-                <tr>
-                  <th>Item Name</th>
-                  <th>Description</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item) => {
-                  const selected = selection.includes(item._id);
-                  return (
-                    <tr
-                      key={item._id}
-                      className={cx({ [classes.rowSelected]: selected })}
-                    >
-                      <td>{item.title}</td>
-                      <td>{item.description}</td>
-                      <td>{item.price}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
+
+            <ShowItems />
             <div
               style={{
                 display: "flex",
