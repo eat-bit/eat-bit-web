@@ -70,6 +70,7 @@ export async function acceptOrder(ans, idx) {
 }
 
 export async function addItem(fullName, price, description, imageURL) {
+    price = BigInt(price);
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     await connectWallet().then(async (res) => {
         const txResponse = await contract.connect(signer).addItem(fullName, price, description, imageURL);
@@ -81,10 +82,9 @@ export async function addItem(fullName, price, description, imageURL) {
 export async function addRestaurant(fullName, description, address, imageUrl) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     await connectWallet().then(async (res) => {
-        const txResponse = await contract.connect(signer).addRestraunt(fullName, description, address,imageUrl, { gasLimit: 3000000 });
+        const txResponse = await contract.connect(signer).addRestraunt(fullName, description, address, imageUrl, { gasLimit: 3000000 });
         console.log(txResponse.toString());
         return txResponse.toString();
-
     })
 }
 
@@ -94,11 +94,11 @@ export async function orderComplete(idx) {
     await console.log(txResponse.toString());
 }
 
-export async function placeOrder(itemArr, address, fullname, customerContact) {
+export async function placeOrder(itemArr, address, fullname, customerContact, price) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     // const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
     await connectWallet().then(async (res) => {
-        const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
+        const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(price)) });
         return await console.log(txResponse.toString());
     });
     // const txResponse = await contract.connect(signer).placeOrder([0], "address", "fullname", 123, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });

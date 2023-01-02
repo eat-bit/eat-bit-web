@@ -23,10 +23,8 @@ const PlaceOrder = ({ opened, setOpened, totalPrice }) => {
 
   const theme = useMantineTheme();
 
-  console.log("baby", cart);
   let arr = [];
 
-  // [1,2,3] = '1,2,3'
   if (cart) {
     for (let it = 0; it < cart.length; it++) {
       arr.push(cart[it].id);
@@ -38,9 +36,10 @@ const PlaceOrder = ({ opened, setOpened, totalPrice }) => {
     name: "",
     ptaa: "",
     contactNo: "",
-    itemId: arr,
+    itemId: [3],
   });
 
+  console.log("runnn", orderData)
   return (
     <>
       <div className="w-[80%] h-[80%] bg-gradient-to-r from-primary-500 to-blue-500">
@@ -132,20 +131,20 @@ const PlaceOrder = ({ opened, setOpened, totalPrice }) => {
             </div>
 
             <div className="flex items-center space-x-2 mt-5 justify-end">
-              <Link href="/customer/orders" legacyBehavior>
-                <a>
-                  <button
-                    onClick={() => {
+              {/* <Link href="/customer/orders" legacyBehavior> */}
+              <a>
+                <button
+                  onClick={() => {
                     //   console.log("data", orderData);
-                      placeOrder(orderData.itemId, orderData.ptaa, orderData.name, orderData.contactNo);
+                    placeOrder(orderData.itemId, orderData.ptaa, orderData.name, orderData.contactNo, totalPrice);
                     // getBalance();
-                    }}
-                    className="bg-primary text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-                  >
-                    Place Order
-                  </button>
-                </a>
-              </Link>
+                  }}
+                  className="bg-primary text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                >
+                  Place Order
+                </button>
+              </a>
+              {/* </Link> */}
 
               <button
                 className="bg-mainRed text-gray-500 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 "

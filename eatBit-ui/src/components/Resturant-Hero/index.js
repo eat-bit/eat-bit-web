@@ -18,9 +18,6 @@ const RestHero = () => {
                 <h1 className="text-4xl font-bold leading-12 md:text-6xl">
                     Register Your <span className="text-primary">Restaurant Now</span>
                 </h1>
-                {/* <p className="my-6 text-gray-600 leading-8">
-                    Order food from your Favourite restaurants with, now with your e-wallet
-                </p> */}
                 <div onClick={() => setOpened(true)} className="cursor-pointer flex justify-center items-center gap-2 w-max m-auto py-2 px-4 bg-primary text-white font-bold border border-green-500 rounded-md ease-in-out duration-150 shadow-slate-600 hover:bg-white hover:text-black lg:m-0 md:py-3 md:px-6" title="Order Now">
                     <span>Register Now</span>
                     <span><GiHamburger /></span>
