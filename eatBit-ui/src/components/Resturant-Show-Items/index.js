@@ -10,25 +10,28 @@ const ShowItems = () => {
   const arr = [];
 
   useEffect(() => {
-    connectWallet().then((d) => {
-      console.log(d);
+    connectWallet().then((d1) => {
+      console.log(d1);
       itemNumber()
-        .then((d) => {
-          console.log(d);
-          setTotalItems(d);
-          for (let idx = 1; idx < 4; idx++) {
-            itemList(idx).then((d) => {
+        .then((d2) => {
+          console.log(d2);
+          setTotalItems(d2);
+
+          for (let idx = 0; idx < d2; idx++) {
+
+            itemList(idx).then((d3) => {
               const item = {
                 name: "",
                 description: "",
                 price: "",
               };
 
-              item.name = d[0];
-              item.description = d[2];
-              item.price = parseInt(d[1]._hex);
+              item.name = d3[0];
+              item.description = d3[2];
+              item.price = parseInt(d3[1]._hex);
 
               arr.push(item);
+              if (idx == d2-1)
               setItem(arr);
             });
           }
@@ -64,7 +67,7 @@ const ShowItems = () => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => {
+          {items.length > 0 && items.map((item) => {
             const selected = selection.includes(item._id);
             return (
               <tr
