@@ -1,22 +1,11 @@
-import React from "react";
-import { Button, Loader, Pagination, Skeleton } from "@mantine/core";
-// checkOrdersCustomer
-// import { checkOrdersCustomer } from "api";
-import {
-  createStyles,
-  Table,
-  Checkbox,
-  useMantineTheme,
-  PasswordInput,
-  Alert,
-} from "@mantine/core";
+import { Pagination } from "@mantine/core";
+import { createStyles, Table } from "@mantine/core";
 
-import Link from "next/link";
-
-import { Ban, Dots, Select } from "tabler-icons-react";
-import { useEffect, useState } from "react";
+import { checkOrdersCustomer } from "api";
+import fetchOrders from "global/fetchOrders";
 import dynamic from "next/dynamic";
-import { checkOrdersCustomer, itemList, orderDetails } from "api";
+import { useEffect, useState } from "react";
+import { Dots, Select } from "tabler-icons-react";
 // Components
 const Navbar = dynamic(() => import("components/Navbar"), { ssr: false });
 const MarkOrderComplete = dynamic(
@@ -31,36 +20,7 @@ export default function CustomerOrder() {
     },
   }));
 
-  const data = [
-    {
-      id: "1",
-      address: "M3 Street-2",
-      orders: ["Pizza 2", "Burgers 5"],
-      price: "1500",
-    },
-    {
-      id: "2",
-      address: "M3 Street-2",
-      orders: ["Pizza 2", "Burgers 5"],
-      price: "1500",
-    },
-    {
-      id: "3",
-      address: "M3 Street-2",
-      orders: ["Pizza 2", "Burgers 5"],
-      price: "1500",
-    },
-    {
-      id: "4",
-      address: "M3 Street-2",
-      orders: ["Pizza 2", "Burgers 5"],
-      price: "1500",
-    },
-  ];
-  // const [orderList, setOrderList] = useState([]);
   const [finalOrderList, setFinalOrderList] = useState([]);
-  const [finalOrderIds, setFinalOrderIds] = useState([]);
-  // const [orderIds, setOrderIds] = useState([]);
 
   const setOrderIdsFunc = async () => {
     let orderIdArr = [];
@@ -79,57 +39,6 @@ export default function CustomerOrder() {
 
       return orderIdArr;
     });
-  };
-
-  const parseOrder = async (str, orderId) => {
-    const ele = str.split(",");
-
-    const itemArraySize = Number(ele[ele.length - 1] - 1);
-    let itemArray = [];
-
-    for (let ind = 1; ind < itemArraySize + 2; ind++) {
-      itemArray.push(ele[ind]);
-    }
-
-    console.log(itemArray);
-
-    const itemPromise = (itemArray = itemArray.map(async (item) => {
-      return itemList(item).then((res) => {
-        // console.log(res)
-        return res[0];
-      });
-    }));
-
-    const order = {
-      _id: orderId,
-      custAddress: ele[0],
-      itemArray: await Promise.all(itemPromise),
-      amount: ele[2 + itemArraySize],
-      restrauntId: ele[3 + itemArraySize],
-      isFullfiled: ele[4 + itemArraySize],
-      isAccepted: ele[5 + itemArraySize],
-      custPhysicalAddress: ele[6 + itemArraySize],
-      custName: ele[7 + itemArraySize],
-      custcontactNumber: ele[8 + itemArraySize],
-      timeStamp: ele[9 + itemArraySize],
-    };
-    return order;
-  };
-
-  const fetchOrders = async (orderIdArray) => {
-    let orderList = [];
-
-    const orderPromises = orderIdArray.map(async (item) => {
-      return orderDetails(item).then((res) => {
-        return parseOrder(res, item);
-      });
-    });
-
-    await Promise.all(orderPromises).then((results) => {
-      orderList = results;
-    });
-
-    return orderList;
   };
 
   const LoadOrders = async () => {

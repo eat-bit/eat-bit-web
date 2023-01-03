@@ -8,7 +8,7 @@ const RestNavbar = dynamic(() => import("components/Resturant-Navbar"), {
   ssr: false,
 });
 const AcceptRejectOrder = dynamic(
-  () => import("components/Restaurant-Orders"),
+  () => import("components/AcceptRejectOrders"),
   {
     ssr: false,
   }
@@ -80,8 +80,7 @@ export default function Orders() {
         <Table
           sx={{ minWidth: 800 }}
           verticalSpacing="sm"
-          style={{ background: "white" }}
-        >
+          style={{ background: "white" }}>
           <thead>
             <tr>
               <th>Customer Address</th>
@@ -97,8 +96,7 @@ export default function Orders() {
               return (
                 <tr
                   key={item._id}
-                  className={cx({ [classes.rowSelected]: selected })}
-                >
+                  className={cx({ [classes.rowSelected]: selected })}>
                   <td>{item.address}</td>
                   <td>{`${item.orders}`}</td>
                   <td>{item.price}</td>
@@ -124,8 +122,7 @@ export default function Orders() {
             justifyContent: "flex-end",
             width: "100%",
             marginTop: "2rem",
-          }}
-        >
+          }}>
           <Pagination size="sm" total={10} position="end"></Pagination>
         </div>
       </div>
