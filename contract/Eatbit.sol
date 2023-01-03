@@ -50,6 +50,7 @@ contract Eatbit {
         string custName;
         string custcontactNumber;
         uint256 timeStamp;
+        uint256 itemArrSize;
     }
 
     struct Item {
@@ -194,7 +195,8 @@ contract Eatbit {
                 customerPhysicalAddress,
                 customerName,
                 customerContactNumber,
-                block.timestamp
+                block.timestamp,
+                itemIdArray.length
             )
         );
         restrauntList[tempRestrauntId].orderId.push(orderNumber);
@@ -238,7 +240,7 @@ contract Eatbit {
         return (ids, tempNumberOfOrders);
     }
 
-    function getRestrauntId() public view returns (uint256) {
+    function getRestrauntId() public view returns (uint256 id) {
         for (uint256 ind = 0; ind < restrauntList.length; ind++) {
             if (msg.sender == restrauntList[ind].sender) {
                 return ind;
@@ -261,6 +263,13 @@ contract Eatbit {
         view
         returns (uint256[] memory)
     {
+        Order memory tempOrder = orderList[orderId];
+        require(
+            tempOrder.customerAdd == msg.sender ||
+                restrauntList[tempOrder.restrauntId].sender == msg.sender,
+            "Unauthorized"
+        );
+
         return orderList[orderId].itemIds;
     }
 

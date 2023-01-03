@@ -66,7 +66,7 @@ export default function CustomerOrder() {
     let orderIdArr = [];
 
     return checkOrdersCustomer().then((res) => {
-      console.log(res)
+      console.log(res);
       res = res.split(",");
 
       res.forEach((item, ind) => {
@@ -74,7 +74,7 @@ export default function CustomerOrder() {
           orderIdArr.push(item);
         }
       });
-      
+
       console.log(orderIdArr);
 
       return orderIdArr;
@@ -103,15 +103,14 @@ export default function CustomerOrder() {
   const fetchOrders = async (orderIdArray) => {
     let orderList = [];
 
-    orderIdArray.forEach((item, ind) => {
-      orderDetails(item).then((res) => {
-        // console.log(res);
-        orderList.push(parseOrder(res, orderIdArray[ind]));
-
-        // console.log(orderList);
-        ind === orderIdArray.length - 1 && setFinalOrderList(orderList);
+    const orderPromises = orderIdArray.map((item) => {
+      return orderDetails(item).then((res) => {
+        return parseOrder(res, item);
       });
-      //  orderList;
+    });
+
+    await Promise.all(orderPromises).then((results) => {
+      orderList = results;
     });
 
     return orderList;
@@ -119,7 +118,10 @@ export default function CustomerOrder() {
 
   const LoadOrders = async () => {
     setOrderIdsFunc().then((res) => {
-      fetchOrders(res);
+      fetchOrders(res).then((ress) => {
+        console.log(ress);
+        setFinalOrderList(ress);
+      });
     });
   };
 
@@ -137,7 +139,6 @@ export default function CustomerOrder() {
           class="font-medium leading-tight text-3xl mt-0 mb-2 text-black-600">
           Order List
         </h3>
-        {finalOrderList.length > 0 && console.log(finalOrderList)}
       </div>
       <div className="flex flex-col justify-start w-full h-full py-3 px-5 bg-white">
         <Table
