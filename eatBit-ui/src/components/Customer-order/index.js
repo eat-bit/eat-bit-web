@@ -2,6 +2,7 @@ import { Pagination } from "@mantine/core";
 import { createStyles, Table } from "@mantine/core";
 
 import { checkOrdersCustomer } from "api";
+import dateFormater from "global/dateFormater";
 import fetchOrders from "global/fetchOrders";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
@@ -93,7 +94,7 @@ export default function CustomerOrder() {
                   transitionDuration={0}
                 />
               </th> */}
-              <th>Customer Address</th>
+              <th>Time</th>
               <th>Orders</th>
               <th>Total Price</th>
               <th>Accepted</th>
@@ -116,7 +117,7 @@ export default function CustomerOrder() {
                       transitionDuration={0}
                     />
                   </td> */}
-                  <td>{item.custPhysicalAddress}</td>
+                  <td>{dateFormater( item.timeStamp)}</td>
                   <td>
                     {item.itemArray.map((food, ind) => {
                       let str = food;
