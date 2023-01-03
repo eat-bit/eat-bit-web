@@ -146,6 +146,10 @@ export default function CustomerOrder() {
 
   const isAccepted = false;
 
+  useEffect(() => {
+    LoadOrders();
+  }, []);
+
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <Navbar />
