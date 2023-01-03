@@ -29,6 +29,7 @@ export default function RestaurantOrder() {
 
   const setOrderIdsFunc = async () => {
     return checkOrdersRestaurant().then((res) => {
+      if(!res) return false;
       console.log(res);
       res = res.split(",");
 
