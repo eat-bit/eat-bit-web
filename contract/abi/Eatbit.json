@@ -214,7 +214,7 @@
 		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "id",
 				"type": "uint256"
 			}
 		],
@@ -351,6 +351,11 @@
 					{
 						"internalType": "uint256",
 						"name": "timeStamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "itemArrSize",
 						"type": "uint256"
 					}
 				],
