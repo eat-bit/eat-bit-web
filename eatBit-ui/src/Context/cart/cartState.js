@@ -9,7 +9,7 @@ import { useState } from "react";
 const CartState = ({ children }) => {
 
   const [product, setProduct] = useState(data)
-  console.log("pof", product)
+  // console.log("pof", product)
   const [cart, setCart] = useState([]);
 
   const increment = (prod) => setCart((prev) => {

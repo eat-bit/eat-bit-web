@@ -1,47 +1,40 @@
-import { Pagination } from "@mantine/core";
-import { createStyles, Table } from "@mantine/core";
+import { createStyles, Pagination, Table } from "@mantine/core";
 
-import { checkOrdersCustomer } from "api";
-import dateFormater from "global/dateFormater";
-import fetchOrders from "global/fetchOrders";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
-import { Dots, Select } from "tabler-icons-react";
-// Components
-const Navbar = dynamic(() => import("components/Navbar"), { ssr: false });
-const MarkOrderComplete = dynamic(
-  () => import("components/Customer-MarkOrderComplete"),
-  { ssr: false }
+const RestNavbar = dynamic(() => import("components/Resturant-Navbar"), {
+  ssr: false,
+});
+const AcceptRejectOrder = dynamic(
+  () => import("components/AcceptRejectOrders"),
+  {
+    ssr: false,
+  }
 );
 
-export default function CustomerOrder() {
-  const useStyles = createStyles((theme) => ({
-    rowSelected: {
-      backgroundColor: "var(--pastel-color)",
-    },
-  }));
+import { checkOrdersRestaurant } from "api";
+import fetchOrders from "global/fetchOrders";
+import { useEffect, useState } from "react";
+import { Dots, Select } from "tabler-icons-react";
 
+const useStyles = createStyles(() => ({
+  rowSelected: {
+    backgroundColor: "var(--pastel-color)",
+  },
+}));
+
+export default function RestaurantOrder() {
+  const { classes, cx } = useStyles();
+  const [selection, setSelection] = useState(["2"]);
   const [finalOrderList, setFinalOrderList] = useState([]);
 
   const setOrderIdsFunc = async () => {
-    let orderIdArr = [];
-
-    return checkOrdersCustomer().then((res) => {
+    return checkOrdersRestaurant().then((res) => {
       console.log(res);
       res = res.split(",");
 
-      res.forEach((item, ind) => {
-        if (ind < res[res.length - 1]) {
-          orderIdArr.push(item);
-        }
-      });
-
-      console.log(orderIdArr);
-
-      return orderIdArr;
+      return res;
     });
   };
-
   const LoadOrders = async () => {
     setOrderIdsFunc().then((res) => {
       fetchOrders(res).then((ress) => {
@@ -51,23 +44,19 @@ export default function CustomerOrder() {
     });
   };
 
-  const { classes, cx } = useStyles();
-  const [selection, setSelection] = useState(["2"]);
-
-  const isAccepted = false;
-
   useEffect(() => {
     LoadOrders();
   }, []);
 
+  const isAccepted = false;
+
   return (
     <div style={{ height: "100%", width: "100%" }}>
-      <Navbar />
+      <RestNavbar />
       <div className="w-full py-5 px-5 flex justify-between bg-white">
         <h3 class="font-medium leading-tight text-3xl mt-0 mb-2 text-black-600">
           Order List
         </h3>
-        {/* add reload button */}
         <div className="flex flex-row justify-end">
           <button
             onClick={LoadOrders}
@@ -84,22 +73,13 @@ export default function CustomerOrder() {
           style={{ background: "white" }}>
           <thead>
             <tr>
-              {/* <th style={{ width: 40 }}>
-                <Checkbox
-                  onChange={toggleAll}
-                  checked={selection.length === data.length}
-                  indeterminate={
-                    selection.length > 0 && selection.length !== data.length
-                  }
-                  transitionDuration={0}
-                />
-              </th> */}
-              <th>Time</th>
+              <th>Customer Physical Address</th>
+              <th>Customer Name</th>
+              <th>Customer Phone Number</th>
               <th>Orders</th>
               <th>Total Price</th>
-              <th>Accepted</th>
+              <th>Accept/Reject</th>
               <th>Completed</th>
-              <th>Mark Complete</th>
             </tr>
           </thead>
           <tbody>
@@ -117,7 +97,9 @@ export default function CustomerOrder() {
                       transitionDuration={0}
                     />
                   </td> */}
-                  <td>{dateFormater( item.timeStamp)}</td>
+                  <td>{item.custPhysicalAddress}</td>
+                  <td>{item.custName}</td>
+                  <td>{item.custcontactNumber}</td>
                   <td>
                     {item.itemArray.map((food, ind) => {
                       let str = food;
@@ -129,24 +111,14 @@ export default function CustomerOrder() {
                   <td>{item.amount}</td>
 
                   <td className="flex items-center">
+                    <AcceptRejectOrder itemID={item.id} />
+                  </td>
+                  <td className="">
                     {isAccepted ? (
                       <Select style={{ marginRight: "1rem" }} color="green" />
                     ) : (
                       <Dots style={{ marginRight: "1rem" }} color="orange" />
                     )}
-                    {/* <Ban
-                      style={{ cursor: "pointer", marginRight: "1rem" }}
-                      color="red"
-                    /> */}
-                  </td>
-                  <td>
-                    <Select
-                      style={{ cursor: "pointer", marginRight: "1rem" }}
-                      color="green"
-                    />
-                  </td>
-                  <td>
-                    <MarkOrderComplete itemID={item._id} />
                   </td>
                 </tr>
               );
