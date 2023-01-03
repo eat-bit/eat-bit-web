@@ -2,6 +2,10 @@ import { orderDetails } from "api";
 import parseOrder from "./parseOrder";
 
 const fetchOrders = async (orderIdArray) => {
+  if(!orderIdArray){
+    return []
+  }
+  
   let orderList = [];
 
   const orderPromises = orderIdArray.map(async (item) => {
