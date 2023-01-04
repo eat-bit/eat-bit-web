@@ -48,6 +48,9 @@ const Navbar = () => {
           <li className="text-white font-semibold ease-in-out duration-150 hover:text-black sm:text-black text-lg" title="Contact Us" onClick={() => closeNav()}>
             <Link href="/customer/contact-us">Contact Us</Link>
           </li>
+          <li className="text-white font-semibold ease-in-out duration-150 hover:text-black sm:text-black text-lg" title="Contact Us" onClick={() => closeNav()}>
+            <Link href="/customer/orders">Orders</Link>
+          </li>
         </ul>
       </div>
 

@@ -1,12 +1,13 @@
 import { itemNumber, itemList, connectWallet } from "api";
 import { useEffect, useState } from "react";
-import { Modal, createStyles, useMantineTheme, Table } from "@mantine/core";
-
+import { Modal, createStyles, useMantineTheme, Table, Button } from "@mantine/core";
+import { Dots } from "tabler-icons-react";
 const ShowItems = () => {
   const [totalItems, setTotalItems] = useState(0);
 
   const [items, setItem] = useState([]);
 
+  const [fetchItems, setFetchItems] = useState(false);
   
   useEffect(() => {
     connectWallet().then((d1) => {
@@ -43,7 +44,7 @@ const ShowItems = () => {
           console.log(err);
         });
     });
-  }, []);
+  }, [fetchItems]);
 
   const useStyles = createStyles((theme) => ({
     rowSelected: {
@@ -55,6 +56,14 @@ const ShowItems = () => {
 
   return (
     <>
+      <div className="flex flex-row justify-end">
+          <button
+            onClick={() => setFetchItems(!fetchItems)}
+            className="flex flex-row justify-center items-center bg-white border-2 border-black-600 rounded-md px-3 py-2 text-black-600 hover:bg-black-600 hover:text-white">
+            <Dots size={20} strokeWidth={1.5} />
+            <span className="ml-2">Reload</span>
+          </button>
+        </div>
       <Table
         sx={{ minWidth: 800 }}
         verticalSpacing="sm"
