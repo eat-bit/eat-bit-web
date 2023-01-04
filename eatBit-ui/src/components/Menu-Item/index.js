@@ -1,8 +1,11 @@
+import { useState, useEffect } from 'react';
 import { Accordion, Group, Avatar, Text } from '@mantine/core';
 import { data as menuData } from 'components/Menu-data/data';
 import { MdOutlineAddShoppingCart, MdOutlineRemoveShoppingCart, MdStar } from "react-icons/md";
 import CartContext from 'Context/cart/cartContext.js';
 import { useContext } from "react";
+import {checkItemRestraunt, itemList} from 'api';
+import StringToArr from 'global/stringToArr.js';
 
 function AccordionLabel({ item }) {
 
@@ -47,9 +50,27 @@ function AccordionLabel({ item }) {
 }
 
 
-function MenuItem() {
+function MenuItem(props) {
+    const [itemsIdxList, setItemsIdxList] = useState([]);
+    const [menuItems, setMenuItems] = useState([]);
 
-
+    useEffect(() => {
+        checkItemRestraunt(props.restIdx).then((itemsIdx) => {
+            const arr = StringToArr(itemsIdx);
+            setItemsIdxList(arr);
+            return arr;
+        })
+        .then((arr) => {
+            for (let idx = 0; idx < arr.length; idx++) {
+                itemList(arr[idx]).then((item) => {
+                    setMenuItems((prev) => [...prev, item]);
+                });
+            }
+            setTimeout(() => {
+                console.log("menuItems", menuItems);
+            }, 2000);
+        });
+    }, []);
 
     const items = menuData.map((item, idx) => (
 

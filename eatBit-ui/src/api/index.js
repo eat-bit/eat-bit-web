@@ -1,7 +1,7 @@
 const { ethers } = require("ethers");
 import contractAbi from "../../../contract/abi/Eatbit.json";
 
-const contractAddress = "0xbBa8089d70fC5e049C96Ab5Bbc6a891B88fc1Ae1";
+const contractAddress = "0x4C79336987874cbfE5F442C4A321A6E3b967D111";
 
 let provider = new ethers.providers.Web3Provider(window.ethereum);
 let signer;
@@ -111,10 +111,10 @@ export async function getRestrauntId() {
     await console.log(txResponse.toString());
 }
 
-export async function checkItemRestraunt() {
+export async function checkItemRestraunt(idx) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).checkItemRestraunt(0);
-    await console.log(txResponse.toString());
+    const txResponse = await contract.connect(signer).checkItemRestraunt(idx);
+    return txResponse.toString();
 }
 
 export async function getItemIdForOrder() {

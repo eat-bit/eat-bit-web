@@ -25,20 +25,21 @@ function AccordionLabel({ title, description, location, image_url }) {
 }
 
 function Resturant() {
-  const [totalRestaurants, setTotalRestaurants] = useState(0);
+  // const [totalRestaurants, setTotalRestaurants] = useState(0);
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
     connectWallet().then(() => {
       restaurantNumber()
-        .then((rests) => {
-          setTotalRestaurants(rests);
-          return rests;
-        })
+        // .then((rests) => {
+          // setTotalRestaurants(rests); 
+          // return rests;
+        // })
         .then((rests) => {
           for (let idx = 0; idx < rests; idx++) {
             restaurantList(idx).then((restData) => {
               const restaurant = {
+                idx: idx,
                 title: "",
                 description: "",
                 location: "",
@@ -49,7 +50,7 @@ function Resturant() {
               restaurant.location = restData[4];
               restaurant.image_url = restData[0];
               restaurants.push(restaurant);
-              if (idx == totalRestaurants - 1) setRestaurants(restaurants);
+              if (idx == rests - 1) setRestaurants(restaurants);
             });
           }
         });
@@ -69,9 +70,9 @@ function Resturant() {
       <Accordion.Control>
         <AccordionLabel {...item} />
       </Accordion.Control>
-      <Accordion.Panel>
-        <MenuItem />
-      </Accordion.Panel>
+      {/* <Accordion.Panel> */}
+        {/* <MenuItem restIdx={item.idx} />  */}
+      {/* </Accordion.Panel> */}
     </Accordion.Item>
   ));
 
