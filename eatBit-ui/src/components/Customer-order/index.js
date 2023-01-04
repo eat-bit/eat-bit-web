@@ -117,7 +117,7 @@ export default function CustomerOrder() {
                       transitionDuration={0}
                     />
                   </td> */}
-                  <td>{dateFormater( item.timeStamp)}</td>
+                  <td>{dateFormater(item.timeStamp)}</td>
                   <td>
                     {item.itemArray.map((food, ind) => {
                       let str = food;
@@ -129,7 +129,7 @@ export default function CustomerOrder() {
                   <td>{item.amount}</td>
 
                   <td className="flex items-center">
-                    {isAccepted ? (
+                    {item.isAccepted ? (
                       <Select style={{ marginRight: "1rem" }} color="green" />
                     ) : (
                       <Dots style={{ marginRight: "1rem" }} color="orange" />
@@ -140,10 +140,11 @@ export default function CustomerOrder() {
                     /> */}
                   </td>
                   <td>
-                    <Select
-                      style={{ cursor: "pointer", marginRight: "1rem" }}
-                      color="green"
-                    />
+                    {item.isFullfiled ? (
+                      <Select style={{ marginRight: "1rem" }} color="green" />
+                    ) : (
+                      <Dots style={{ marginRight: "1rem" }} color="orange" />
+                    )}
                   </td>
                   <td>
                     <MarkOrderComplete itemID={item._id} />
