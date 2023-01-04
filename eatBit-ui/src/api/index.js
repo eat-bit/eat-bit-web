@@ -1,4 +1,5 @@
 const { ethers } = require("ethers");
+import parseErrorMessage from "global/parseErrorMessage";
 import contractAbi from "../../../contract/abi/Eatbit.json";
 
 const contractAddress = "0x4C79336987874cbfE5F442C4A321A6E3b967D111";
@@ -53,14 +54,27 @@ export async function orderDetails(idx) {
 
 export async function checkOrdersCustomer() {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).checkOrdersCust();
-    return txResponse.toString();
+    return await connectWallet().then(async (res) => {
+      const txResponse = await contract.connect(signer).checkOrdersCust();
+      return txResponse.toString();
+    })
 }
 
 export async function checkOrdersRestaurant() {
+  try{
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).checkOrdersRestraunt();
-    return await txResponse.toString();
+    
+    return await connectWallet().then(async (res) => {
+      const txResponse = await contract.connect(signer).checkOrdersRestraunt();
+      return await txResponse.toString();
+    })
+  }
+  catch(err){
+    // console.log("fuckedUp",err);
+    console.log(parseErrorMessage(err))
+    alert(parseErrorMessage(err))
+    return ""
+  }
 }
 
 export async function acceptOrder(ans, idx) {
