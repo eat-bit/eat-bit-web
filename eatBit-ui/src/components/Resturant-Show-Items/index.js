@@ -7,15 +7,15 @@ const ShowItems = () => {
 
   const [items, setItem] = useState([]);
 
-  const arr = [];
-
+  
   useEffect(() => {
     connectWallet().then((d1) => {
       console.log(d1);
       itemNumber()
-        .then((d2) => {
+      .then((d2) => {
+          const arr = [];
           console.log(d2);
-          setTotalItems(d2);
+          // setTotalItems(d2);
 
           for (let idx = 0; idx < d2; idx++) {
 
@@ -24,6 +24,7 @@ const ShowItems = () => {
                 name: "",
                 description: "",
                 price: "",
+                _id: idx,
               };
 
               item.name = d3[0];
@@ -32,7 +33,7 @@ const ShowItems = () => {
 
               arr.push(item);
               if (idx == d2-1)
-              setItem(arr);
+                setItem(arr);
             });
           }
           console.log("arr", arr);
@@ -67,16 +68,16 @@ const ShowItems = () => {
           </tr>
         </thead>
         <tbody>
-          {items.length > 0 && items.map((item) => {
-            const selected = selection.includes(item._id);
+          {items.length > 0 && items.map((i) => {
+            {/* const selected = selection.includes(i._id); */}
             return (
               <tr
-                key={item._id}
-                className={cx({ [classes.rowSelected]: selected })}
+                key={i._id}
+                // className={cx({ [classes.rowSelected]: selected })}
               >
-                <td>{item.name}</td>
-                <td>{item.description}</td>
-                <td>{item.price}</td>
+                <td>{i.name}</td>
+                <td>{i.description}</td>
+                <td>{i.price}</td>
               </tr>
             );
           })}

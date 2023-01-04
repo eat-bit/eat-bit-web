@@ -31,11 +31,8 @@ function Resturant() {
   useEffect(() => {
     connectWallet().then(() => {
       restaurantNumber()
-        // .then((rests) => {
-          // setTotalRestaurants(rests); 
-          // return rests;
-        // })
         .then((rests) => {
+          const arr = [];
           for (let idx = 0; idx < rests; idx++) {
             restaurantList(idx).then((restData) => {
               const restaurant = {
@@ -49,8 +46,8 @@ function Resturant() {
               restaurant.description = restData[3];
               restaurant.location = restData[4];
               restaurant.image_url = restData[0];
-              restaurants.push(restaurant);
-              if (idx == rests - 1) setRestaurants(restaurants);
+              arr.push(restaurant);
+              if (idx == rests - 1) setRestaurants(arr);
             });
           }
         });
