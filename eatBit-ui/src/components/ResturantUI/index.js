@@ -51,14 +51,6 @@ function Resturant() {
             });
           }
         });
-      // .then(() => {
-      //   // itemList(0).then((d3) => {
-      //   //   console.log(d3);
-      //   // });
-      //   setTimeout(() => {
-      //     console.log("restaurants", restaurants);
-      //   }, 2000);
-      // });
     });
   }, []);
 
@@ -67,9 +59,9 @@ function Resturant() {
       <Accordion.Control>
         <AccordionLabel {...item} />
       </Accordion.Control>
-      {/* <Accordion.Panel> */}
-        {/* <MenuItem restIdx={item.idx} />  */}
-      {/* </Accordion.Panel> */}
+      <Accordion.Panel>
+        <MenuItem restIdx={item.idx} /> 
+      </Accordion.Panel>
     </Accordion.Item>
   ));
 
