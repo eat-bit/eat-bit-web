@@ -1,8 +1,7 @@
 const { ethers } = require("ethers");
-import parseErrorMessage from "global/parseErrorMessage";
 import contractAbi from "../../../contract/abi/Eatbit.json";
 
-const contractAddress = "0x4C79336987874cbfE5F442C4A321A6E3b967D111";
+const contractAddress = "0xbBa8089d70fC5e049C96Ab5Bbc6a891B88fc1Ae1";
 
 let provider = new ethers.providers.Web3Provider(window.ethereum);
 let signer;
@@ -34,16 +33,16 @@ export async function itemNumber() {
     return await txResponse.toString();
 }
 
-export async function restaurantList() {
+export async function restaurantList(idx) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).restrauntList(0);
-    await console.log(txResponse);
+    const txResponse = await contract.connect(signer).restrauntList(idx);
+    return txResponse;
 }
 
 export async function restaurantNumber() {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     const txResponse = await contract.connect(signer).restrauntNumber();
-    await console.log(txResponse.toString());
+    return txResponse.toString();
 }
 
 export async function orderDetails(idx) {
@@ -54,27 +53,14 @@ export async function orderDetails(idx) {
 
 export async function checkOrdersCustomer() {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    return await connectWallet().then(async (res) => {
-      const txResponse = await contract.connect(signer).checkOrdersCust();
-      return txResponse.toString();
-    })
+    const txResponse = await contract.connect(signer).checkOrdersCust();
+    return txResponse.toString();
 }
 
 export async function checkOrdersRestaurant() {
-  try{
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    
-    return await connectWallet().then(async (res) => {
-      const txResponse = await contract.connect(signer).checkOrdersRestraunt();
-      return await txResponse.toString();
-    })
-  }
-  catch(err){
-    // console.log("fuckedUp",err);
-    console.log(parseErrorMessage(err))
-    alert(parseErrorMessage(err))
-    return ""
-  }
+    const txResponse = await contract.connect(signer).checkOrdersRestraunt();
+    return await txResponse.toString();
 }
 
 export async function acceptOrder(ans, idx) {
