@@ -1,7 +1,7 @@
 const { ethers } = require("ethers");
 import contractAbi from "../../../contract/abi/Eatbit.json";
 
-const contractAddress = "0xbBa8089d70fC5e049C96Ab5Bbc6a891B88fc1Ae1";
+const contractAddress = "0x4C79336987874cbfE5F442C4A321A6E3b967D111";
 
 let provider = new ethers.providers.Web3Provider(window.ethereum);
 let signer;
