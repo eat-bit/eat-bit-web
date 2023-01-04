@@ -2,20 +2,9 @@ import { useState } from "react";
 import { Help } from "tabler-icons-react";
 
 import {
-    Modal,
-    createStyles,
-    useMantineTheme,
-    Table,
-    Checkbox,
-    Pagination,
-    Tooltip,
+    createStyles, Modal, Tooltip, useMantineTheme
 } from "@mantine/core";
 
-const useStyles = createStyles((theme) => ({
-    rowSelected: {
-        backgroundColor: "#e8fff0",
-    },
-}));
 
 import { addItem } from "api";
 

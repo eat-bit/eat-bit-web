@@ -1,17 +1,6 @@
-import FoodItem from "components/ResturantUI/index.js";
 import { useState } from "react";
-import {
-  Modal,
-  createStyles,
-  useMantineTheme,
-  Table,
-  Checkbox,
-  Pagination,
-  Tooltip,
-} from "@mantine/core";
+import { useMantineTheme, Pagination } from "@mantine/core";
 import dynamic from "next/dynamic";
-
-import { data } from "components/Featured-Food/data/data.js";
 
 const RestNavbar = dynamic(() => import("components/Resturant-Navbar"), {
   ssr: false,
@@ -21,13 +10,11 @@ const AddItem = dynamic(() => import("components/Resturant-Add-Item"), {
   ssr: false,
 });
 
-
 const ShowItems = dynamic(() => import("components/Resturant-Show-Items"), {
   ssr: false,
 });
 
-
-const Items = ({ }) => {
+const Items = ({}) => {
   const theme = useMantineTheme();
 
   const [open, setOpen] = useState(false);
@@ -38,8 +25,6 @@ const Items = ({ }) => {
     price: "",
     imageURL: "",
   });
-
-
 
   return (
     <>
@@ -54,9 +39,7 @@ const Items = ({ }) => {
       </button>
       <div className="h-full w-full flex flex-col justify-center items-center mt-6">
         {/* <FoodItem food={restData} /> */}
-        {open && (
-          <AddItem open={open} setOpen={setOpen} />
-        )}
+        {open && <AddItem open={open} setOpen={setOpen} />}
 
         {/* menu items */}
 
@@ -67,7 +50,6 @@ const Items = ({ }) => {
             </h3>
           </div>
           <div className="flex flex-col justify-start py-3 px-5 bg-white">
-
             <ShowItems />
             <div
               style={{
@@ -87,6 +69,3 @@ const Items = ({ }) => {
 };
 
 export default Items;
-
-
-
