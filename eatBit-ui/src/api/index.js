@@ -34,16 +34,16 @@ export async function itemNumber() {
     return await txResponse.toString();
 }
 
-export async function restaurantList() {
+export async function restaurantList(idx) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).restrauntList(0);
-    await console.log(txResponse);
+    const txResponse = await contract.connect(signer).restrauntList(idx);
+    return txResponse;
 }
 
 export async function restaurantNumber() {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     const txResponse = await contract.connect(signer).restrauntNumber();
-    await console.log(txResponse.toString());
+    return txResponse.toString();
 }
 
 export async function orderDetails(idx) {
@@ -125,10 +125,10 @@ export async function getRestrauntId() {
     await console.log(txResponse.toString());
 }
 
-export async function checkItemRestraunt() {
+export async function checkItemRestraunt(idx) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).checkItemRestraunt(0);
-    await console.log(txResponse.toString());
+    const txResponse = await contract.connect(signer).checkItemRestraunt(idx);
+    return txResponse.toString();
 }
 
 export async function getItemIdForOrder() {

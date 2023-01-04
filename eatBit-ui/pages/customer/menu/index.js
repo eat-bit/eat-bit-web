@@ -1,15 +1,13 @@
-import { Accordion, Group, Avatar, Text } from '@mantine/core';
-import dynamic from 'next/dynamic';
+import { Accordion, Group, Avatar, Text } from "@mantine/core";
+import dynamic from "next/dynamic";
 // Components
-const Navbar = dynamic(() => import('components/Navbar'), { ssr: false });
-import Resturant from 'components/ResturantUI'
-
-
+const Navbar = dynamic(() => import("components/Navbar"), { ssr: false });
+const Resturant = dynamic(() => import("components/ResturantUI"), {
+  ssr: false,
+});
 
 function Menu() {
   return (
-
-
     <div className="p-3 max-w-7xl m-auto">
       <Navbar />
       <div>
@@ -21,8 +19,6 @@ function Menu() {
       </div>
       <Resturant />
     </div>
-
-
   );
 }
 
