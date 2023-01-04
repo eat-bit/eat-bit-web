@@ -7,15 +7,15 @@ export default function MarkOrderComplete({itemID}) {
 
   const [orderC, setOrderC] = useState(false);
 
-  useEffect(() => {
-
-	connectWallet().then((d1) => {
-		console.log(d1);
-		orderComplete(itemID).then((d2) => {
-			console.log("output", d2)
+	const checkOrderStatus = () => {
+			connectWallet().then((d1) => {
+			console.log(d1);
+			orderComplete(itemID).then((d2) => {
+				console.log("output", d2)
 		})
 	})
-  }, [orderC]);
+	}
+	
 
 
 
@@ -23,7 +23,7 @@ export default function MarkOrderComplete({itemID}) {
     <Select
       style={{ cursor: "pointer", marginRight: "1rem" }}
       color="green"
-      onClick={() => setOrderC(!orderC)}
+      onClick={() => checkOrderStatus()}
     />
   );
 }
