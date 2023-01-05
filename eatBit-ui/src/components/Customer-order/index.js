@@ -54,7 +54,7 @@ export default function CustomerOrder() {
   const { classes, cx } = useStyles();
   const [selection, setSelection] = useState(["2"]);
 
-  const isAccepted = false;
+  // const isAccepted = false;
 
   useEffect(() => {
     LoadOrders();
