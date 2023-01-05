@@ -78,10 +78,12 @@ function MenuItem(props) {
                 title: "",
                 description: "",
                 image_url: "",
+                price: "",
               };
               foodItem.title = item[0];
               foodItem.description = item[2];
               foodItem.image_url = item[3];
+              foodItem.price = item.price.toString();
               menu.push(foodItem);
             })
             .then(() => {
