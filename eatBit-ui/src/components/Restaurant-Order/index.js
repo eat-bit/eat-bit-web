@@ -49,8 +49,6 @@ export default function RestaurantOrder() {
     LoadOrders();
   }, []);
 
-  const isAccepted = false;
-
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <RestNavbar />
@@ -115,7 +113,7 @@ export default function RestaurantOrder() {
                     <AcceptRejectOrder itemID={item._id} />
                   </td>
                   <td className="">
-                    {isAccepted ? (
+                    {item.isFullfiled ? (
                       <Select style={{ marginRight: "1rem" }} color="green" />
                     ) : (
                       <Dots style={{ marginRight: "1rem" }} color="orange" />
