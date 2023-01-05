@@ -15,9 +15,6 @@ export default function MarkOrderComplete({itemID}) {
 		})
 	})
 	}
-	
-
-
 
   return (
     <Select
