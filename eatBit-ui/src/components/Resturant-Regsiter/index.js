@@ -10,7 +10,7 @@ import Link from "next/link";
 
 import React from "react";
 
-import { addRestaurant, connectWallet, isRestrauntExist } from "api";
+import { addRestaurant } from "api";
 
 import { useEffect, useState } from "react";
 
@@ -33,20 +33,6 @@ const Register = ({ opened, setOpened }) => {
     })
 
 
-
-    const checkRest = () => {
-
-        connectWallet().then(() => {
-            isRestrauntExist().then((d) => {
-                if (!d) {
-                    addRestaurant(restData.name, restData.description, restData.ptaa, "url")
-                }
-                else {
-                    window.location.href = "/resturant/add-items"
-                }
-            })
-        })
-    }
 
     return (
         <>
@@ -123,13 +109,10 @@ const Register = ({ opened, setOpened }) => {
                             <a>
                                 <button
                                     onClick={() => {
-                                        checkRest();
-                                        // if (!exist) {
-                                        //     const a = addRestaurant(restData.name, restData.description, restData.ptaa, "url")
-                                        //     console.log(a.then((t) => console.log("tista", t)));
-
-                                        // }
-                                    }}
+                                        const a = addRestaurant(restData.name, restData.description, restData.ptaa, "url")
+                                        console.log(a.then((t) => console.log("tista", t)));
+                                    }
+                                    }
                                     className="bg-primary text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                                 // style={{ background: loader ? "var(--secondary-color)" : "var(--primary-color)" }}
 

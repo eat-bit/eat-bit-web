@@ -27,17 +27,19 @@ const PlaceOrder = ({ opened, setOpened, totalPrice }) => {
 
   if (cart) {
     for (let it = 0; it < cart.length; it++) {
-      arr.push(cart[it].idx);
+      arr.push(cart[it].id);
     }
   }
 
+  // const [opened, setOpened] = useState(true);
   const [orderData, setorderData] = useState({
     name: "",
     ptaa: "",
     contactNo: "",
-    itemId: arr,
+    itemId: [3],
   });
 
+  console.log("runnn", orderData)
   return (
     <>
       <div className="w-[80%] h-[80%] bg-gradient-to-r from-primary-500 to-blue-500">
@@ -136,7 +138,6 @@ const PlaceOrder = ({ opened, setOpened, totalPrice }) => {
                     //   console.log("data", orderData);
                     placeOrder(orderData.itemId, orderData.ptaa, orderData.name, orderData.contactNo, totalPrice);
                     // getBalance();
-                    setOpened(!opened);
                   }}
                   className="bg-primary text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                 >

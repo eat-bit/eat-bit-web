@@ -119,9 +119,6 @@ export async function orderComplete(idx) {
 }
 
 export async function placeOrder(itemArr, address, fullname, customerContact, price) {
-
-    console.log("paise", price, itemArr)
-    price = BigInt(price)
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     // const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
     await connectWallet().then(async (res) => {
@@ -153,5 +150,5 @@ export async function getItemIdForOrder() {
 export async function isRestrauntExist() {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     const txResponse = await contract.connect(signer).isRestrauntExist();
-    return txResponse.toString();
+    await console.log(txResponse.toString());
 }
