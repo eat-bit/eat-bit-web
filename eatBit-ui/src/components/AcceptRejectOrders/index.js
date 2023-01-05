@@ -3,18 +3,24 @@ import React from "react";
 import {acceptOrder} from "api";
 import { Ban, Select } from "tabler-icons-react";
 
+const acceptRejectOrder = (ans, orderId) => {
+  acceptOrder(ans, orderId).then((res) => {
+    console.log(res);
+  });
+};
+
 export default function AcceptRejectOrder(props) {
   return (
     <>
       <Select
         style={{ cursor: "pointer", marginRight: "1rem" }}
         color="green"
-        onClick={() => acceptOrder(true, props.itemID)}
+        onClick={() => acceptRejectOrder(true, props.itemID)}
       />
       <Ban
         style={{ cursor: "pointer", marginRight: "1rem" }}
         color="red"
-        onClick={() => acceptOrder(false, props.itemID)}
+        onClick={() => acceptRejectOrder(false, props.itemID)}
       />
     </>
   );
