@@ -103,9 +103,19 @@ export async function addRestaurant(fullName, description, address, imageUrl) {
 }
 
 export async function orderComplete(idx) {
-    const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    const txResponse = await contract.connect(signer).orderComplete(idx);
-    await console.log(txResponse.toString());
+    try {
+        const contract = new ethers.Contract(contractAddress, contractAbi, provider);
+        idx = BigInt(idx);
+        const txResponse = await contract.connect(signer).orderComplete(idx);
+        await console.log(txResponse.toString());
+    }
+    
+    catch(err){
+        // console.log("fuckedUp",err);
+        console.log(parseErrorMessage(err))
+        alert(parseErrorMessage(err))
+        return ""
+  }
 }
 
 export async function placeOrder(itemArr, address, fullname, customerContact, price) {

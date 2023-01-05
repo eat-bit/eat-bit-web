@@ -6,7 +6,7 @@ import dateFormater from "global/dateFormater";
 import fetchOrders from "global/fetchOrders";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { Dots, Select } from "tabler-icons-react";
+import { SquareX, Dots, Select, X } from "tabler-icons-react";
 // Components
 const Navbar = dynamic(() => import("components/Navbar"), { ssr: false });
 const MarkOrderComplete = dynamic(
@@ -129,11 +129,28 @@ export default function CustomerOrder() {
                   <td>{item.amount}</td>
 
                   <td className="flex items-center">
-                    {item.isAccepted ? (
-                      <Select style={{ marginRight: "1rem" }} color="green" />
-                    ) : (
-                      <Dots style={{ marginRight: "1rem" }} color="orange" />
-                    )}
+                    {
+                      {
+                        "1": (
+                          <Select
+                            style={{ marginRight: "1rem" }}
+                            color="green"
+                          />
+                        ),
+                        "0": (
+                          <Dots
+                            style={{ marginRight: "1rem" }}
+                            color="orange"
+                          />
+                        ),
+                        "-1": (
+                          <SquareX
+                            style={{ marginRight: "1rem" }}
+                            color="red"
+                          />
+                        ),
+                      }[item.isAccepted]
+                    }
                     {/* <Ban
                       style={{ cursor: "pointer", marginRight: "1rem" }}
                       color="red"
