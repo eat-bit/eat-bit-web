@@ -110,7 +110,7 @@ export default function RestaurantOrder() {
                   <td>{item.amount}</td>
 
                   <td className="flex items-center">
-                    <AcceptRejectOrder itemID={item._id} />
+                    <AcceptRejectOrder itemID={item._id} currState={item.isAccepted}/>
                   </td>
                   <td className="">
                     {item.isFullfiled ? (
