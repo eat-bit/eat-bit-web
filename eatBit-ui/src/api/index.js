@@ -80,7 +80,7 @@ export async function checkOrdersRestaurant() {
 export async function acceptOrder(ans, idx) {
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     const txResponse = await contract.connect(signer).acceptOrder(ans, idx);
-    await console.log(txResponse.toString());
+    return txResponse.toString();
 }
 
 export async function addItem(fullName, price, description, imageURL) {
