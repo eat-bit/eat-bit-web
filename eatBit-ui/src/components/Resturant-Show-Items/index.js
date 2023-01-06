@@ -14,6 +14,7 @@ import {
   Button,
 } from "@mantine/core";
 import { Dots } from "tabler-icons-react";
+import Link from "next/link";
 const ShowItems = () => {
   const [totalItems, setTotalItems] = useState(0);
 
@@ -110,7 +111,8 @@ const ShowItems = () => {
                   <td>{i.name}</td>
                   <td>{i.description}</td>
                   <td>{i.price}</td>
-                  <td><a href={i.image_url} target="_blank">Link</a></td>
+                  <td><Link target={"_blank"} href={i.image_url}>Link</Link></td>
+
                 </tr>
               );
             })}

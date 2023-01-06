@@ -12,7 +12,7 @@ const AboutUsBanner = () => {
                     Deticated to Delight you
                 </h1>
                 <p className="my-6 text-gray-600 leading-8">
-                    EatBit- A decentralised application built on [] that helps you order your favourite food through any crypto wallet.
+                    EatBit- A decentralised application built on blockchain that helps you order your favourite food through any crypto wallet.
                 </p>
                 <Link href="/customer/orders" legacyBehavior>
                     <a className="flex justify-center items-center gap-2 w-max m-auto py-2 px-4 bg-primary text-white font-bold border border-green-500 rounded-md ease-in-out duration-150 shadow-slate-600 hover:bg-white hover:text-black lg:m-0 md:py-3 md:px-6" title="Orders">
