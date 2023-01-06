@@ -49,8 +49,6 @@ export default function RestaurantOrder() {
     LoadOrders();
   }, []);
 
-  const isAccepted = false;
-
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <RestNavbar />
@@ -112,10 +110,10 @@ export default function RestaurantOrder() {
                   <td>{item.amount}</td>
 
                   <td className="flex items-center">
-                    <AcceptRejectOrder itemID={item.id} />
+                    <AcceptRejectOrder itemID={item._id} currState={item.isAccepted}/>
                   </td>
                   <td className="">
-                    {isAccepted ? (
+                    {item.isFullfiled ? (
                       <Select style={{ marginRight: "1rem" }} color="green" />
                     ) : (
                       <Dots style={{ marginRight: "1rem" }} color="orange" />

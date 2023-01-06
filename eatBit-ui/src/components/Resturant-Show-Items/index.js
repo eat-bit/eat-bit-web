@@ -112,6 +112,7 @@ const ShowItems = () => {
                   <td>{i.description}</td>
                   <td>{i.price}</td>
                   <td><Link target={"_blank"} href={i.image_url}>Link</Link></td>
+
                 </tr>
               );
             })}
