@@ -133,10 +133,18 @@ export async function placeOrder(itemArr, address, fullname, customerContact, pr
 }
 
 export async function getRestrauntId() {
+  try{
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     const txResponse = await contract.connect(signer).getRestrauntId();
     // await console.log(txResponse.toString());
     return txResponse;
+  }
+  catch(err){
+    // console.log("fuckedUp",err);
+    console.log(parseErrorMessage(err))
+    alert(parseErrorMessage(err))
+    return ""
+  }
 }
 
 export async function checkItemRestraunt(idx) {

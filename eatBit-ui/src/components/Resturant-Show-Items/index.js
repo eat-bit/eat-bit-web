@@ -29,7 +29,7 @@ const ShowItems = () => {
         // console.log(id);
         checkItemRestraunt(id)
           .then((d2) => {
-            d2 = d2.map((i) => parseInt(i));
+            d2 = d2?.map((i) => parseInt(i));
             const arr = [];
             console.log(d2);
             // setTotalItems(d2);
