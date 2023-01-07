@@ -5,7 +5,6 @@ import Register from 'components/Resturant-Regsiter';
 // React Icons
 import { MdOutlineDeliveryDining, MdOutlineShoppingCart } from "react-icons/md";
 import AvatarCustom from '../CustomAvatar';
-import { connectWallet } from 'api';
 import { Button } from '@mantine/core';
 
 
@@ -13,7 +12,7 @@ const RestNavbar = () => {
 
     const [opened, setOpened] = useState(false);
     let [navOpen, setNavbOpen] = useState(false);
-  const [account, setAccount] = useState(null);
+    const [account, setAccount] = useState(null);
 
   useEffect(() => {
     if (window.ethereum) {
