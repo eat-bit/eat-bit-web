@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from "next/link";
 import styles from "../../styles/Navbar.module.css";
 import Register from 'components/Resturant-Regsiter';
@@ -15,6 +15,11 @@ const RestNavbar = () => {
     let [navOpen, setNavbOpen] = useState(false);
   const [account, setAccount] = useState(null);
 
+  useEffect(() => {
+    if (window.ethereum) {
+      setAccount(window.ethereum._state.accounts[0]);
+    }
+  }, []);
 
     const closeNav = () => {
         if (!navOpen) {

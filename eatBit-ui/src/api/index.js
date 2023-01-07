@@ -4,7 +4,11 @@ import contractAbi from "../../../contract/abi/Eatbit.json";
 
 const contractAddress = "0x4C79336987874cbfE5F442C4A321A6E3b967D111";
 
-let provider = new ethers.providers.Web3Provider(window.ethereum);
+if (!window?.ethereum) {
+    alert("Please install MetaMask!");
+}
+
+let provider = window?.ethereum ? new ethers.providers.Web3Provider(window.ethereum) : null;
 let signer;
 
 export async function connectWallet() {
@@ -94,12 +98,22 @@ export async function addItem(fullName, price, description, imageURL) {
 }
 
 export async function addRestaurant(fullName, description, address, imageUrl) {
+  // console.log("addRestaurant", fullName, description, address, imageUrl)
+  try{
     const contract = new ethers.Contract(contractAddress, contractAbi, provider);
     await connectWallet().then(async (res) => {
         const txResponse = await contract.connect(signer).addRestraunt(fullName, description, address, imageUrl, { gasLimit: 3000000 });
         console.log(txResponse.toString());
         return txResponse.toString();
     })
+  }
+  catch(err){
+    // console.log("fuckedUp",err);
+    console.log(parseErrorMessage(err))
+    alert(parseErrorMessage(err))
+    return ""
+  }
+  
 }
 
 export async function orderComplete(idx) {
