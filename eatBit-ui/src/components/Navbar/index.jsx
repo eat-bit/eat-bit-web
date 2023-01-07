@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import styles from "../../styles/Navbar.module.css";
 import { connectWallet } from "api";
@@ -10,6 +10,12 @@ import { Button } from '@mantine/core';
 const Navbar = () => {
   let [navOpen, setNavbOpen] = useState(false);
   const [account, setAccount] = useState(null);
+
+  useEffect(() => {
+    if (window.ethereum) {
+      setAccount(window.ethereum._state.accounts[0]);
+    }
+  }, []);
 
   const closeNav = () => {
     if (!navOpen) {
