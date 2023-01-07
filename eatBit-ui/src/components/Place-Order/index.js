@@ -25,7 +25,7 @@ const PlaceOrder = ({ opened, setOpened, totalPrice }) => {
 
   const theme = useMantineTheme();
 
-  console.log(cart);
+  console.log("uio", cart);
   let arr = [];
 
   if (cart) {

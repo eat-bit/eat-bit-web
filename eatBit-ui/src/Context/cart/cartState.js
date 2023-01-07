@@ -22,7 +22,7 @@ const CartState = ({ children }) => {
 
   const increaseTheCartQty = (itm) => setCart((prev) => {
     const index = prev.findIndex(prod => {
-      return prod.id === itm.id;
+      return prod.itemId === itm.itemId;
     })
     prev[index].qty += 1;
     return [...prev];
@@ -32,10 +32,14 @@ const CartState = ({ children }) => {
 
   const decreaseTheCartQty = (itm) => setCart((prev) => {
     const index = prev.findIndex(prod => {
-      return prod.id === itm.id;
+      return prod.itemId === itm.itemId;
     })
-    if (prev[index].qty > 0)
+
+    if (prev[index].qty > 1)
       prev[index].qty -= 1;
+    else if (prev[index].qty == 1) {
+      return prev.filter(c => c.itemId !== itm.itemId)
+    } 
     return [...prev];
   })
 
