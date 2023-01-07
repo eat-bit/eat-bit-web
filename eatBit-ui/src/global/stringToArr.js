@@ -1,4 +1,4 @@
 export default function StringToArr(str) {
-    return str.split(",").map(Number);
-    
+    const arrInt = str.map((i) => parseInt(i));
+    return arrInt;
 }
