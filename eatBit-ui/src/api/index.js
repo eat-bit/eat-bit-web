@@ -133,14 +133,23 @@ export async function orderComplete(idx) {
 }
 
 export async function placeOrder(itemArr, address, fullname, customerContact, price) {
+    try {
+        console.log("paise", price, itemArr)
+        const contract = new ethers.Contract(contractAddress, contractAbi, provider);
+        // const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
+        await connectWallet().then(async (res) => {
+            const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(price)) });
+            return txResponse.toString();
+        });
+    }
+    
 
-    console.log("paise", price, itemArr)
-    const contract = new ethers.Contract(contractAddress, contractAbi, provider);
-    // const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
-    await connectWallet().then(async (res) => {
-        const txResponse = await contract.connect(signer).placeOrder(itemArr, address, fullname, customerContact, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(price)) });
-        return txResponse.toString();
-    });
+    catch(err){
+    // console.log("fuckedUp",err);
+    console.log(parseErrorMessage(err))
+    alert(parseErrorMessage(err))
+    return ""
+  }
     // const txResponse = await contract.connect(signer).placeOrder([0], "address", "fullname", 123, { gasLimit: 3000000, value: ethers.utils.parseEther(ethers.utils.formatEther(1)) });
     // return await txResponse.toString();
 }
