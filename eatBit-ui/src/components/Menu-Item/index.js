@@ -27,7 +27,7 @@ function AccordionLabel({ item }) {
       <div>
         <div className="w-[100%] flex justify-between">
           <Text>{title}</Text>
-          {cart.some((p) => p.idx === item.idx) ? (
+          {cart.some((p) => p.id === item.id) ? (
             <button
               onClick={() => {
                 setNot(true);
@@ -68,7 +68,7 @@ function MenuItem(props) {
   useEffect(() => {
     checkItemRestraunt(props.restIdx)
       .then((itemsIdx) => {
-        return StringToArr(itemsIdx);
+        return (StringToArr(itemsIdx));
       })
       .then((arr) => {
         const menu = [];
