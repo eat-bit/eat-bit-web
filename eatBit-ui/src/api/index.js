@@ -4,7 +4,11 @@ import contractAbi from "../../../contract/abi/Eatbit.json";
 
 const contractAddress = "0x4C79336987874cbfE5F442C4A321A6E3b967D111";
 
-let provider = new ethers.providers.Web3Provider(window.ethereum);
+if (!window?.ethereum) {
+    alert("Please install MetaMask!");
+}
+
+let provider = window?.ethereum ? new ethers.providers.Web3Provider(window.ethereum) : null;
 let signer;
 
 export async function connectWallet() {
