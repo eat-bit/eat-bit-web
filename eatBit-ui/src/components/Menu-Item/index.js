@@ -14,7 +14,7 @@ import StringToArr from "global/stringToArr.js";
 function AccordionLabel({ item }) {
   const { title, image_url, description } = item;
 
-  console.log("hh", image_url)
+  console.log("hh", item)
 
   const { product, cart, increment, decrement } = useContext(CartContext);
   // console.log("added", cart);
@@ -27,7 +27,7 @@ function AccordionLabel({ item }) {
       <div>
         <div className="w-[100%] flex justify-between">
           <Text>{title}</Text>
-          {cart.some((p) => p.id === item.id) ? (
+          {cart.some((p) => p.itemId === item.itemId) ? (
             <button
               onClick={() => {
                 setNot(true);
@@ -75,17 +75,20 @@ function MenuItem(props) {
         for (let idx = 0; idx < arr.length; idx++) {
           itemList(arr[idx])
             .then((item) => {
+              console.log("hars", item.id.toString())
               const foodItem = {
                 idx: idx,
                 title: "",
                 description: "",
                 image_url: "",
                 price: "",
+                itemId: ""
               };
               foodItem.title = item[0];
               foodItem.description = item[2];
               foodItem.image_url = item[3];
               foodItem.price = item.price.toString();
+              foodItem.itemId = parseInt(item.id);
               menu.push(foodItem);
             })
             .then(() => {

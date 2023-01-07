@@ -18,18 +18,32 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: "bg-primary",
   },
 }));
+
+
 const PlaceOrder = ({ opened, setOpened, totalPrice }) => {
   const { cart } = useContext(CartContext);
 
   const theme = useMantineTheme();
 
+  console.log(cart);
   let arr = [];
 
   if (cart) {
     for (let it = 0; it < cart.length; it++) {
-      arr.push(cart[it].idx);
+      console.log("cart item", cart[it], cart[it].qty)
+
+      if (cart[it].qty > 1) {
+        for (let items = cart[it].qty; items>0; items--) {
+			arr.push(cart[it].itemId);		
+        }
+      }
+      else {
+		arr.push(cart[it].itemId)
+      }
     }
   }
+
+  console.log(arr);
 
   const [orderData, setorderData] = useState({
     name: "",

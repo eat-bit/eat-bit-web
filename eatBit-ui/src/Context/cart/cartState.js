@@ -17,7 +17,7 @@ const CartState = ({ children }) => {
   });
 
   const decrement = (itm) => setCart((prev) => {
-    return prev.filter((c) => c.idx !== itm.idx)
+    return prev.filter((c) => c.itemId !== itm.itemId)
   })
 
   const increaseTheCartQty = (itm) => setCart((prev) => {

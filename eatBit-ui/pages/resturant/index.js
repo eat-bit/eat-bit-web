@@ -5,7 +5,11 @@ import dynamic from "next/dynamic";
 const RestNavbar = dynamic(() => import("components/Resturant-Navbar"), {
     ssr: false,
   });
-import RestHero from 'components/Resturant-Hero';
+
+const RestHero = dynamic(() => import("components/Resturant-Hero"), {
+    ssr: false,
+  });
+
 import Footer from "components/Footer";
 
 // Scroll To Top Hook

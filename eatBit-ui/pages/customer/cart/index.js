@@ -29,7 +29,7 @@ export default function Cart() {
     const [opened, setOpened] = useState(false);
 
     // const cart = product.cart;
-    console.log(cart)
+    console.log("shivu" , cart)
     // setState({ ...state, "name": "Shivangi" })
 
     useScrollTop();

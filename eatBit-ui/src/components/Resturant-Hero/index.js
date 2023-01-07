@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from "next/link";
 import dynamic from 'next/dynamic';
 const Register = dynamic(() => import('components/Resturant-Regsiter'), {
     ssr: false,
 });
+
+import { connectWallet, isRestrauntExist } from 'api';
+
 
 // React Icons
 import { GiHamburger } from "react-icons/gi";
@@ -11,6 +14,20 @@ import { GiHamburger } from "react-icons/gi";
 const RestHero = () => {
 
     const [opened, setOpened] = useState(false);
+
+    useEffect(()=> {
+
+        connectWallet().then(() => {
+            isRestrauntExist().then((d) => {
+                
+                if (d == "true") {
+                    window.location.href = "/resturant/add-items"
+                    return;
+                }
+            })
+        })
+
+    }, [])
 
     return (
         <div className="py-8 grid grid-cols-1 place-items-center gap-0 lg:grid-cols-2 lg:gap-10 md:py-32">
