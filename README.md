@@ -16,6 +16,6 @@ EatBit is a platform that allows customers to order food directly from restauran
 - At the time of delivery, the customer has to accept the order completion in the application.
 - The funds are then transferred from the smart contract to the restaurant's address.
 ---
-The project can be accessed here: https://www.eatbit.tech/
+The project can be accessed here: https://www.eat-bit-phi.vercel.app/
 
 The smart contract is deployed on Polygon network, here is the link to the contract deployed on the explorer: https://mumbai.polygonscan.com/address/0x4C79336987874cbfE5F442C4A321A6E3b967D111
